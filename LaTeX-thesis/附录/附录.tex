@@ -1,0 +1,337 @@
+% !TEX root = ../thesis.tex
+% 附录全手动实现
+\phantomsection\addcontentsline{toc}{section}{附录 A}
+\titleformat{\section}{\sanhao\bfseries\centering}{\thescetion}{1em}{}
+\setcounter{subsection}{0}
+\setcounter{equation}{0}
+
+\section*{附录\quad A} % 作为标题
+
+\setcounter{section}{10} % 将section 设置为10 为了超链接正确
+\renewcommand\thesection{A}
+
+    \subsection{协方差矩阵性质} \label{A.1}
+
+        协方差矩阵总是对称半正定的. 说明其对称是容易的, 即
+
+        \begin{equation}
+            \Sigma_{i,j}=\mathrm{cov}(Y_{i},Y_{j})=\mathrm{cov}(Y_{j},Y_{i})=\Sigma_{j,i}.
+        \end{equation}
+
+        下面证明协方差矩阵是半正定的.
+        \begin{pf}
+            设$X$为一服从均值向量为$\mu$,协方差矩阵为$\Sigma$的$d$维高斯随机向量,$\mu=\mathrm{E}(X)$,$\Sigma=\mathrm{var}(X)$,由协方差矩阵的定义可得
+            \begin{equation}
+                \Sigma=\mathrm{var}(X)=\mathrm{E}[(X-\mu)(X-\mu)^{T}].
+            \end{equation}
+            设$\forall\alpha\in\mathds{R}^{d}$,有
+            \begin{equation}
+                \alpha^{T}\Sigma\alpha=\alpha^{T}\mathrm{E}[(X-\mu)(X-\mu)^{T}]\alpha=\mathrm{E}[\alpha^{T}(X-\mu)(X-\mu)^{T}\alpha].
+            \end{equation}
+            令$Y=\alpha^{T}(X-\mu)=(X-\mu)^{T}\alpha$, $X-\mu$是服从于中心化后(centered)的多维高斯分布, 由多维高斯分布的定义可知$Y\sim\mathcal{N}$, 且易得$\mathrm{E}(Y)=0$,于是
+
+            \begin{equation}
+                \alpha^{T}\Sigma\alpha=\mathrm{E}(Y^{2})=\mathrm{var}(Y)\geqslant 0.
+            \end{equation}
+            由矩阵半正定的定义可得$\Sigma$为半正定矩阵.
+        \end{pf}
+
+    \subsection{高斯条件分布} \label{A.2}
+
+        为证明式\ref{muc}与式\ref{sigc}, 需要先介绍分块矩阵求逆定理(inversion of a
+        partitioned matrix)\cite{rasmussen2006gaussian}. 设矩阵$A$为分块矩阵, 其逆阵为$A^{-1}$
+
+        \begin{equation}
+            A=  \begin{pmatrix}
+                    P & Q \\
+                    R & S \\
+                \end{pmatrix}, \qquad\qquad
+            A^{-1}= \begin{pmatrix}
+                        \tilde{P} & \tilde{Q} \\
+                        \tilde{R} & \tilde{S} \\
+                    \end{pmatrix}.
+        \end{equation}
+
+        其中$P$与$\tilde{P}$为$n_{1}\times n_{1}$的方阵, $S$与$\tilde{S}$为$n_{2}\times n_{2}$的方阵. 在已知$P$,$Q$,$R$,$S$的条件下, 可由下式计算得到$\tilde{P}$,$\tilde{Q}$,$\tilde{R}$,$\tilde{S}$.
+
+        \begin{equation}
+            \begin{cases}
+                \tilde{P}=N. \\
+                \tilde{Q}=-NQS^{-1}. \\ 
+                \tilde{R}=-S^{-1}RN. \\
+                \tilde{S}=S^{-1}+S^{-1}RNQS^{-1}. \label{A2.6}
+            \end{cases}
+        \end{equation}
+
+        其中$N=(P-QS^{-1}R)^{-1}$. 下面在基于性质2.2的设定下完成对式\ref{muc}与式\ref{sigc}的证明.
+
+        \begin{pf}
+            不失一般性, 我们假定$Y$是经过中心化的, 即$\mu=0$. 对于高斯分布我们通常只需关注指数部分, 从多维高斯分布的pdf出发,代入\ref{2.13}我们得到
+            \begin{align}\label{A2.7}
+                f_{Y}(y)&\propto\mathrm{exp}\left(-\frac{1}{2}y^{T}\Sigma^{-1}y\right) \notag \\
+                &\propto\mathrm{exp}\left( -\left(y^{T}_{1}\ y^{T}_{2}\right)
+                \begin{pmatrix}
+                    \Sigma_{1,1} & \Sigma_{1,2} \\
+                    \Sigma_{2,1} & \Sigma_{2,2} \\
+                \end{pmatrix}^{-1}
+                \left({y_{1}\atop y_{2}}\right)\right).
+            \end{align}
+
+            下面求分块矩阵的逆,令
+
+            \begin{equation}
+                \begin{pmatrix}
+                    \Sigma_{1,1} & \Sigma_{1,2} \\
+                    \Sigma_{2,1} & \Sigma_{2,2} \\
+                \end{pmatrix}^{-1}=
+                \begin{pmatrix}
+                    A & B \\
+                    C & D \\
+                \end{pmatrix}.
+            \end{equation}
+
+            由\ref{A2.6}计算得
+
+            \begin{equation}\label{A2.9}
+                \begin{cases}
+                    A=N. \\
+                    B=-N\Sigma_{1,2}\Sigma_{2,2}^{-1}. \\ 
+                    C=-\Sigma_{2,2}^{-1}\Sigma_{2,1}N. \\
+                    D=\Sigma_{2,2}^{-1}+\Sigma_{2,2}^{-1}\Sigma_{2,1}N\Sigma_{1,2}\Sigma_{2,2}^{-1}. 
+                \end{cases} 
+            \end{equation}
+
+            上式中$N=(\Sigma_{1,1}-\Sigma_{1,2}\Sigma^{-1}_{2,2}\Sigma_{2,1})^{-1}$, 由协方差矩阵性质$\Sigma_{1,2}=\Sigma^{T}_{2,1}$.
+
+            将式\ref{A2.9}代入式\ref{A2.7}, 并进行整理
+
+            \begin{align}\label{A.10}
+                f_{Y}(y)&\propto\mathrm{exp}\left( -\left(y^{T}_{1}\ y^{T}_{2}\right)
+                \begin{pmatrix}
+                    A & B \\
+                    C & D \\
+                \end{pmatrix}
+                \left({y_{1}\atop y_{2}}\right)\right)\notag\\
+                &\propto\mathrm{exp}(-y^{T}_{1}Ay_{1}-y^{T}_{2}Cy_{1}-y^{T}_{1}By_{2}-y^{T}_{2}Dy_{2} )\notag\\
+                &\begin{aligned}
+                    \ \propto\mathrm{exp}(  &-y^{T}_{1}(\Sigma_{1,1}-\Sigma_{1,2}\Sigma^{-1}_{2,2}\Sigma{2,1})^{-1}y_{1} \\ 
+                                            &+y^{T}_{2}\Sigma^{-1}_{2,2}\Sigma_{2,1}(\Sigma_{1,1}-\Sigma_{1,2}\Sigma^{-1}_{2,2}\Sigma_{2,1})^{-1}y_{1} \\ 
+                                            &+y^{T}_{1}(\Sigma_{1,1}-\Sigma_{1,2}\Sigma^{-1}_{2,2}\Sigma_{2,1})^{-1}\Sigma_{1,2}\Sigma^{-1}_{2,2}y_{2} \\ 
+                                            &-y^{T}_{2}\left[\Sigma^{-1}_{2,2}+\Sigma^{-1}_{2,2}\Sigma_{2,1}(\Sigma_{1,1}-\Sigma_{1,2}\Sigma^{-1}_{2,2}\Sigma_{2,1})^{-1}\Sigma_{1,2}\Sigma^{-1}_{2,2}\right]y_{2})  \\
+                \end{aligned} \notag\\
+                &\begin{aligned}
+                    \ \propto\mathrm{exp}(  &-y^{T}_{1}(\Sigma_{1,1}-\Sigma_{1,2}\Sigma^{-1}_{2,2}\Sigma_{2,1})^{-1}(y_{1}-\Sigma_{1,2}\Sigma^{-1}_{2,2}y_{2}) \\ 
+                                            &+y^{T}_{2}\Sigma^{-1}_{2,2}\Sigma_{2,1}(\Sigma_{1,1}-\Sigma_{1,2}\Sigma^{-1}_{2,2}\Sigma_{2,1})^{-1}(y_{1}-\Sigma_{1,2}\Sigma^{-1}_{2,2}y_{2})) \\ 
+                \end{aligned} \notag\\
+                &\propto\mathrm{exp}(-(y^{T}_{1}-y^{T}_{2}\Sigma^{-1}_{2,2}\Sigma_{2,1})(\Sigma_{1,1}-\Sigma^{-1}_{2,2}\Sigma_{2,1})^{-1}(y_{1}-\Sigma_{1,2}\Sigma^{-1}_{2,2}y_{2})) \notag\\
+                &\propto\mathrm{exp}(-(y_{1}-\Sigma_{1,2}\Sigma^{-1}_{2,2}y_{2})^{T}(\Sigma_{1,1}-\Sigma^{-1}_{2,2}\Sigma_{2,1})^{-1}(y_{1}-\Sigma_{1,2}\Sigma^{-1}_{2,2}y_{2})).
+            \end{align}
+
+            在$y_{2}$已知的条件下, $\mu_{c}=\Sigma_{1,2}\Sigma^{-1}_{2,2}y_{2}$与$\Sigma_{c}=\Sigma_{1,1}-\Sigma^{-1}_{2,2}\Sigma_{2,1}$是确定的, 故$Y_{1}|Y_{2}$服从均值为$\mu_{c}$,协方差矩阵为$\Sigma_{c}$的高斯分布, 即
+
+            $$Y_{1}|Y_{2}\sim\mathcal{N}(\mu_{c},\Sigma_{c}).$$
+
+            如果不考虑进行中心化, 则只需将式\ref{A.10}中$y_{1}$与$y_{2}$分别用$y_{1}-\mu_{1}$与$y_{2}-\mu_{2}$替代, 即得到式\ref{muc}与式\ref{sigc}结果.
+
+        \end{pf}
+
+    \subsection{贝叶斯线性模型$\boldsymbol{w}$的后验分布推导} \label{A.3}
+
+        将式\ref{2.23}, 式\ref{2.24}代入式\ref{2.25}进行整理
+        \begin{equation}\label{A3.11}
+        \begin{aligned}
+            p(\boldsymbol{w}|\boldsymbol{X},\boldsymbol{y})
+            &\propto p(\boldsymbol{y}|\boldsymbol{X},\boldsymbol{w})p(\boldsymbol{w}) \\
+            &\propto \mathrm{exp}\left(-\frac{1}{2\sigma^{2}_{n}}(\boldsymbol{y}-\boldsymbol{X}^{T}\boldsymbol{w})^{T}(\boldsymbol{y}-\boldsymbol{X}^{T}\boldsymbol{w})\right) \mathrm{exp}\left(-\frac{1}{2}\boldsymbol{w}^{T}\Sigma^{-1}_{p}\boldsymbol{w} \right) \\
+            &\propto \mathrm{exp}\left(-\frac{1}{2}\left[\frac{1}{\sigma^{2}_{n}}(\boldsymbol{y}-\boldsymbol{X}^{T}\boldsymbol{w})^{T}(\boldsymbol{y}-\boldsymbol{X}^{T}\boldsymbol{w})-\boldsymbol{w}^{T}\Sigma^{-1}_{p}\boldsymbol{w}\right] \right) \\
+            &\propto \mathrm{exp}\left(-\frac{1}{2}\left[ \frac{1}{\sigma^{2}_{n}}\boldsymbol{y}^{T}\boldsymbol{y} - \frac{1}{\sigma^{2}_{n}}\boldsymbol{y}^{T}\boldsymbol{X}^{T}\boldsymbol{w} - \frac{1}{\sigma^{2}_{n}}\boldsymbol{w}^{T}\boldsymbol{Xy} + \frac{1}{\sigma^{2}_{n}}\boldsymbol{w}^{T}\boldsymbol{X}\boldsymbol{X}^{T}\boldsymbol{w} + \boldsymbol{w}^{T}\Sigma^{-1}_{p}\boldsymbol{w} \right] \right) \\
+            &\propto \mathrm{exp}\left(-\frac{1}{2}\left[- \frac{2}{\sigma^{2}_{n}}\boldsymbol{w}^{T}\boldsymbol{Xy} + \frac{1}{\sigma^{2}_{n}}\boldsymbol{w}^{T}\boldsymbol{X}\boldsymbol{X}^{T}\boldsymbol{w} + \boldsymbol{w}^{T}\Sigma^{-1}_{p}\boldsymbol{w} \right] \right) \\
+            &\propto \mathrm{exp}\left(-\frac{1}{2}\left[ -\frac{2}{\sigma^{2}_{n}}\boldsymbol{w}^{T}\boldsymbol{Xy} + \boldsymbol{w}^{T}(\frac{1}{\sigma^{2}_{n}}\boldsymbol{X}\boldsymbol{X}^{T} + \Sigma^{-1}_{p})\boldsymbol{w} \right] \right) \\
+            &\propto \mathrm{exp}\left(-\frac{1}{2}\left[ -\frac{2}{\sigma^{2}_{n}}\boldsymbol{w}^{T}\boldsymbol{Xy} + \boldsymbol{w}^{T}A\boldsymbol{w} \right] \right).
+        \end{aligned}
+        \end{equation}
+
+        其中$A=\sigma^{-2}\boldsymbol{X}\boldsymbol{X}^{T} + \Sigma^{-1}_{p}$. 最后需要凑成多维高斯分布指数的形式, 可以使用待定系数法来求$\boldsymbol{\bar{w}}$. 从目标形式出发
+
+        \begin{equation}\label{A3.12}
+            \begin{aligned}
+                p(\boldsymbol{w}|\boldsymbol{X},\boldsymbol{y})
+                &\propto \mathrm{exp}\left( -\frac{1}{2}(\boldsymbol{w}-\boldsymbol{\bar{w}})^{T}A(\boldsymbol{w}-\boldsymbol{\bar{w}}) \right) \\
+                &\propto \mathrm{exp}\left( -\frac{1}{2}(\boldsymbol{w}^{T}A\boldsymbol{w} - \boldsymbol{w}^{T}A\boldsymbol{\bar{w}} - \boldsymbol{\bar{w}}^{T}A\boldsymbol{w} + \boldsymbol{\bar{w}}^{T}A\boldsymbol{\bar{w}}) \right) \\
+                &\propto \mathrm{exp}\left( -\frac{1}{2}(\boldsymbol{w}^{T}A\boldsymbol{w} - 2\boldsymbol{w}^{T}A\boldsymbol{\bar{w}}) \right). \\
+            \end{aligned}
+        \end{equation}
+
+        上式推导中注意$\boldsymbol{\bar{w}}$应为与$\boldsymbol{w}$无关的常数. 对比式\ref{A3.11}与式\ref{A3.12}即可得
+
+        \begin{equation}
+            \begin{aligned}
+                A\boldsymbol{\bar{w}}&=\frac{1}{\sigma^{2}_{n}}\boldsymbol{Xy} \\
+                \boldsymbol{\bar{w}}&=\frac{1}{\sigma^{2}_{n}}A^{-1}\boldsymbol{Xy}.
+            \end{aligned}
+        \end{equation}
+
+    \subsection{贝叶斯线性模型预测分布推导} \label{A.4}
+
+        % 这个推导依然有疑问 这里只是我想到的一种可能性
+
+        为了得到$f_{*}|\boldsymbol{x}_{*},\boldsymbol{X},\boldsymbol{y}$的后验分布, 先求$y_{*}|\boldsymbol{x}_{*},\boldsymbol{X},\boldsymbol{y}$的后验分布, 然后利用$y_{*}=f_{*}+\varepsilon_{*}$求得$f_{*}|\boldsymbol{x}_{*},\boldsymbol{X},\boldsymbol{y}$.
+
+        \begin{equation} \label{A4.14}
+            \begin{aligned}
+            p(y_{*}|\boldsymbol{x}_{*},\boldsymbol{X},\boldsymbol{y})
+            &=\int p(y_{*}|\boldsymbol{x}_{*},\boldsymbol{w})p(\boldsymbol{w}|\boldsymbol{X},\boldsymbol{y}) \mathrm{d}\boldsymbol{w}. \\
+            \end{aligned}
+        \end{equation}
+
+        借助式\ref{2.22}与式\ref{2.26}, 有
+
+
+        \begin{equation}
+        \begin{aligned}\label{A4.15}
+            p(y_{*}|\boldsymbol{x}_{*},\boldsymbol{X},\boldsymbol{y})
+            &\propto\int\mathrm{exp}\left(-\frac{(y_{*}-\boldsymbol{w}^{T}\boldsymbol{x}_{*})^{2}}{2\sigma^{2}_{n}} \right)\mathrm{exp}\left( -\frac{1}{2}(\boldsymbol{w}-\boldsymbol{\bar{w}})^{T}A(\boldsymbol{w}-\boldsymbol{\bar{w}}) \right)\mathrm{d}\boldsymbol{w} \\
+            &\propto\int\mathrm{exp}\left[ -\frac{1}{2}\left(\frac{1}{\sigma^{2}_{n}}y_{*}^{2} - \frac{2}{\sigma^{2}_{n}}\boldsymbol{w}^{T}\boldsymbol{x}y_{*} + \frac{1}{\sigma^{2}_{n}}\boldsymbol{w}^{T}\boldsymbol{x}_{*}\boldsymbol{x}_{*}^{T}\boldsymbol{w} + \boldsymbol{w}^{T}A\boldsymbol{w} - 2\boldsymbol{w}^{T}A\boldsymbol{\bar{w}} \right)\right] \mathrm{d}\boldsymbol{w} \\
+            &\propto\int\mathrm{exp}\left[ -\frac{1}{2}\left( \boldsymbol{w}^{T}(\frac{1}{\sigma^{2}_{n}}\boldsymbol{x}_{*}\boldsymbol{x}^{T}_{*}+A )\boldsymbol{w} - 2\boldsymbol{w}^{T}(\frac{1}{\sigma^{2}_{n}}\boldsymbol{x}_{*}y_{*}+A\boldsymbol{\bar{w}} ) + \frac{1}{\sigma^{2}_{n}}y^{2}_{*} \right)\right] \mathrm{d}\boldsymbol{w} \\
+            &\propto\int\mathrm{exp}\left[ -\frac{1}{2}\left( \boldsymbol{w}^{T}L\boldsymbol{w} - 2\boldsymbol{w}^{T}(\frac{1}{\sigma^{2}_{n}}\boldsymbol{x}_{*}y_{*}+A\boldsymbol{\bar{w}} ) + \frac{1}{\sigma^{2}_{n}}y^{2}_{*} \right)\right]\mathrm{d}\boldsymbol{w}. \\
+        \end{aligned}
+        \end{equation}
+
+        上式中$L=\sigma^{-2}_{n}\boldsymbol{x}_{*}\boldsymbol{x}^{T}_{*}+A$, 构造$\boldsymbol{w}$服从均值为$\boldsymbol{m}$, 协方差矩阵为$L$的高斯分布指数部分, 用待定系数法求出$\boldsymbol{m}$.
+
+        \begin{equation}\label{A4.16}
+            \begin{aligned}
+                &(\boldsymbol{w}-\boldsymbol{m})^{T}L(\boldsymbol{w}-\boldsymbol{m}) \\
+                =&\boldsymbol{w}^{T}L\boldsymbol{w}-2\boldsymbol{w}^{T}L\boldsymbol{m}+\boldsymbol{m}^{T}L\boldsymbol{m}
+            \end{aligned}
+        \end{equation}
+
+        对比式\ref{A4.15}与式\ref{A4.16}, 可求出$\boldsymbol{m}$.
+
+        \begin{equation}\label{A4.17}
+            \begin{aligned}
+                L\boldsymbol{m}&=\frac{1}{\sigma^{2}_{n}}\boldsymbol{x}_{*}y_{*}+A\boldsymbol{\bar{w}} \\
+                \boldsymbol{m}&=L^{-1}(\frac{1}{\sigma^{2}_{n}}\boldsymbol{x}_{*}y_{*}+A\boldsymbol{\bar{w}})
+            \end{aligned}
+        \end{equation}
+
+        $\boldsymbol{m}$与$L$是独立于$\boldsymbol{w}$的, 于是
+
+        \begin{equation}
+            \begin{aligned}\label{A4.18}
+                p(y_{*}|\boldsymbol{x}_{*},\boldsymbol{X},\boldsymbol{y})
+                &\propto\int\mathrm{exp}\left( -\frac{1}{2}(\boldsymbol{w}-\boldsymbol{m})^{T}L(\boldsymbol{w}-\boldsymbol{m}) \right) \mathrm{exp}\left[ -\frac{1}{2}(\frac{1}{\sigma^{2}_{n}}y^{2}_{*} - \boldsymbol{m}^{T}L\boldsymbol{m}) \right]  \mathrm{d}\boldsymbol{w} \\
+                &\propto\mathrm{exp}\left[ -\frac{1}{2}\left(\frac{1}{\sigma^{2}_{n}}y^{2}_{*} - \boldsymbol{m}^{T}L\boldsymbol{m}\right) \right]\int\mathrm{exp}\left( -\frac{1}{2}(\boldsymbol{w}-\boldsymbol{m})^{T}L(\boldsymbol{w}-\boldsymbol{m}) \right) \mathrm{d}\boldsymbol{w} \\
+                &\propto\mathrm{exp}\left[ -\frac{1}{2}\left(\frac{1}{\sigma^{2}_{n}}y^{2}_{*} - \boldsymbol{m}^{T}L\boldsymbol{m}\right) \right]\\
+            \end{aligned}
+        \end{equation}
+
+        \begin{equation}
+            \begin{aligned}\label{A4.19}
+                \boldsymbol{m}^{T}L\boldsymbol{m}
+                &=\left(\frac{1}{\sigma^{2}_{n}}\boldsymbol{x}_{*}y_{*}+A\boldsymbol{\bar{w}}\right)^{T}L^{-1}\cdot L\cdot L^{-1}\left(\frac{1}{\sigma^{2}_{n}}\boldsymbol{x}_{*}y_{*}+A\boldsymbol{\bar{w}}\right) \\
+                &=\left( \frac{1}{\sigma^{4}_{n}}\boldsymbol{x}^{T}_{*}L^{-1}\boldsymbol{x}_{*} \right)y^{2}_{*} + 2\left( \frac{1}{\sigma^{2}_{n}}\boldsymbol{x}^{T}_{*}L^{-1}A\boldsymbol{\bar{w}}\right)y_{*}+\boldsymbol{\bar{w}}^{T}AL^{-1}A\boldsymbol{\bar{w}} \\
+            \end{aligned}
+        \end{equation}
+
+        把式\ref{A4.19}代入\ref{A4.18}, 注意$L$,$A$,$\boldsymbol{\bar{w}}$都独立于$y_{*}$,整理得
+
+        \begin{equation}
+            \begin{aligned} \label{A4.20}
+                p(y_{*}|\boldsymbol{x}_{*},\boldsymbol{X},\boldsymbol{y})
+                &\propto\mathrm{exp}\left[ -\frac{1}{2}\left(\frac{1}{\sigma^{2}_{n}}y^{2}_{*} - \boldsymbol{m}^{T}L\boldsymbol{m}\right) \right]\\
+                &\propto\mathrm{exp}\left[ -\frac{1}{2}\left( \Bigl(\frac{1}{\sigma^{2}_{n}}-\frac{1}{\sigma^{4}_{n}}\boldsymbol{x}^{T}_{*}L^{-1}\boldsymbol{x}_{*} \Bigl)y^{2}_{*}-2\Bigl(\frac{1}{\sigma^{2}_{n}}\boldsymbol{x}^{T}_{*}L^{-1}A\boldsymbol{\bar{w}} \Bigl)y_{*} \right) \right] \\
+            \end{aligned}
+        \end{equation}
+
+        同样从目标出发
+
+        \begin{equation} \label{A4.21}
+            \lambda(y_{*}-\bar{y}_{*})^{2}=\lambda y^{2}_{*}-2\lambda \bar{y}_{*}y_{*}+\lambda \bar{y}^{2}_{*}
+        \end{equation}
+
+        对比式\ref{A4.20}括号内部分与式\ref{A4.21}得
+
+            \begin{align} 
+                &\lambda =\frac{1}{\sigma^{2}_{n}}(1-\frac{1}{\sigma^{2}_{n}}\boldsymbol{x}^{T}_{*}L^{-1}\boldsymbol{x}_{*}). \label{A4.22}\\
+                &\bar{y}_{*}=\frac{1}{\lambda}(\frac{1}{\sigma^{2}_{n}}\boldsymbol{x}^{T}_{*}L^{-1}A\boldsymbol{\bar{w}}). \label{A4.23}
+            \end{align}
+
+            于是
+
+            \begin{equation}
+                \begin{aligned} \label{A4.24}
+                    p(y_{*}|\boldsymbol{x}_{*},\boldsymbol{X},\boldsymbol{y})
+                    &\propto\mathrm{exp}\left( -\frac{1}{2}\lambda (y_{*} - \bar{y}_{*})^{2} \right).\\
+                \end{aligned}
+            \end{equation}
+
+            下面计算$\lambda$与$\bar{y}_{*}$以得到预测分布得均值与方差. 为简便起见, 首先计算$L^{-1}$, $\boldsymbol{x}^{T}_{*}L^{-1}\boldsymbol{x}_{*}$, 以及$\boldsymbol{x}^{T}_{*}L^{-1}$. 计算$L^{-1}$需要用到矩阵求逆引理(matrix inversion lemma)\cite{rasmussen2006gaussian}. 以下计算中记$\alpha=\boldsymbol{x}^{T}_{*}A^{-1}\boldsymbol{x}$.
+
+            \begin{equation}
+                \begin{aligned} \label{A4.25}
+                    L^{-1}
+                    &=\left(A+\boldsymbol{x}_{*}\frac{1}{\sigma^{2}_{n}}\boldsymbol{x}^{T}_{*}\right)^{-1} \\
+                    &=A^{-1}-A^{-1}\boldsymbol{x}_{*}(\sigma^{2}_{n}+\boldsymbol{x}^{T}_{*}A^{-1}\boldsymbol{x}_{*})^{-1}\boldsymbol{x}^{T}_{*}A^{-1} \\
+                    &=A^{-1}-\frac{1}{\sigma^{2}_{n}+\alpha}A^{-1}\boldsymbol{x}_{*}\boldsymbol{x}^{T}_{*}A^{-1}.
+                \end{aligned}
+            \end{equation}
+
+            \begin{equation}
+                \begin{aligned} \label{A4.26}
+                    \boldsymbol{x}^{T}_{*}L^{-1}\boldsymbol{x}_{*}
+                    &=\boldsymbol{x}^{T}_{*}A^{-1}\boldsymbol{x}_{*}-\frac{1}{\sigma^{2}_{n}+\alpha}\boldsymbol{x}^{T}_{*}A^{-1}\boldsymbol{x}_{*}\boldsymbol{x}^{T}_{*}A^{-1}\boldsymbol{x}_{*}=\frac{\alpha \sigma^{2}_{n}}{\sigma^{2}_{n}+\alpha}.
+                \end{aligned}
+            \end{equation}
+
+            \begin{equation}\label{A4.27}
+                    \boldsymbol{x}^{T}_{*}L^{-1}=\frac{\sigma^{2}_{n}}{\sigma^{2}_{n}+\alpha} \boldsymbol{x}^{T}_{*}A^{-1}.
+            \end{equation}
+
+            故
+
+            \begin{equation}\label{A4.28}
+                \lambda=\frac{1}{\sigma^{2}_{n}+\alpha}.
+            \end{equation}
+
+            \begin{equation}\label{A4.29}
+                \bar{y}_{*}=\frac{1}{\sigma^{2}_{n}}\boldsymbol{x}^{T}_{n}A^{-1}\boldsymbol{Xy}.
+            \end{equation}
+
+            \begin{equation}\label{A4.30}
+                y_{*}|\boldsymbol{x}_{*},\boldsymbol{X},\boldsymbol{y}\sim\mathcal{N}(\frac{1}{\sigma^{2}_{n}}\boldsymbol{x}^{T}_{n}A^{-1}\boldsymbol{Xy}, \frac{1}{\lambda}=\sigma^{2}_{n}+\boldsymbol{x}^{T}_{*}A^{-1}\boldsymbol{x}).
+            \end{equation}
+
+            由$f_{*}=y_{*}-\varepsilon_{*}$
+
+            \begin{equation}\label{A4.31}
+                f_{*}|\boldsymbol{x}_{*},\boldsymbol{X},\boldsymbol{y}\sim\mathcal{N}(\frac{1}{\sigma^{2}_{n}}\boldsymbol{x}^{T}_{n}A^{-1}\boldsymbol{Xy}, \boldsymbol{x}^{T}_{*}A^{-1}\boldsymbol{x}).
+            \end{equation}
+            
+    \subsection{贝叶斯线性模型预测分布变形} \label{A.5}
+        首先对式\ref{2.30}均值进行变形.
+
+        \begin{equation} \label{A5.32}
+            \begin{aligned}
+                \boldsymbol{\phi}^{T}_{*}\left( \frac{1}{\sigma^{2}_{n}}A^{-1}\boldsymbol{\varPhi} \right)\boldsymbol{y}
+                &=\boldsymbol{\phi}^{T}_{*}\left[ A^{-1}\cdot \frac{1}{\sigma^{2}_{n}}\boldsymbol{\varPhi}(K+\sigma^{2}_{n}I)\cdot (K+\sigma^{2}_{n}I)^{-1} \right] \boldsymbol{y} \\
+                &=\boldsymbol{\phi}^{T}_{*}\left[ A^{-1}\cdot A\Sigma_{p}\boldsymbol{\varPhi} \cdot (K+\sigma^{2}_{n}I)^{-1} \right] \boldsymbol{y} \\
+                &=\boldsymbol{\phi}^{T}_{*}\Sigma_{p}\boldsymbol{\varPhi}(K+\sigma^{2}_{n}I)^{-1}\boldsymbol{y}.
+            \end{aligned}
+        \end{equation}
+
+        然后方差的变形需要先用矩阵求逆引理展开$A^{-1}$.
+
+        \begin{equation} \label{A5.33}
+            \begin{aligned}
+                A^{-1}&=\left(\frac{1}{\sigma^{2}_{n}}\boldsymbol{\varPhi}\boldsymbol{\varPhi}^{T}+\Sigma^{-1}_{p}\right)^{-1} \\
+                &=\Sigma_{p}-\Sigma_{p}\boldsymbol{\varPhi}(\boldsymbol{\varPhi}^{T}\Sigma_{p}\boldsymbol{\varPhi} + \sigma^{2}_{n}I)^{-1}\boldsymbol{\varPhi}^{T}\Sigma_{p} \\
+                &=\Sigma_{p}-\Sigma_{p}\boldsymbol{\varPhi}(K + \sigma^{2}_{n}I)^{-1}\boldsymbol{\varPhi}^{T}\Sigma_{p} \\
+            \end{aligned}
+        \end{equation}
+
+        故
+
+        \begin{equation} \label{A5.34}
+                \boldsymbol{\phi}_{*}^{T}A^{-1}\boldsymbol{\phi}_{*}=\boldsymbol{\phi}^{T}_{*}\Sigma_{p}\boldsymbol{\phi}_{*} -  \boldsymbol{\phi}^{T}_{*}\Sigma_{p}\boldsymbol{\varPhi}(K+\sigma^{2}_{n}I)^{-1} \boldsymbol{\varPhi}^{T}\Sigma_{p}\boldsymbol{\phi}_{*}
+        \end{equation}

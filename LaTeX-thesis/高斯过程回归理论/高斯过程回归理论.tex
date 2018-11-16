@@ -1,0 +1,464 @@
+% !TEX root = ../thesis.tex
+\newpage
+\section{高斯过程回归理论}
+
+    本章首先介绍随机过程与高斯分布, 特别是重点讨论了多维高斯分布的性质, 这是高斯过程应用于回归的理论基础. 然后介绍高斯过程和高斯过程回归模型的建立. 最后是模型的求解, 简单讨论了核函数选择和模型超参数的求解问题.
+
+    \subsection{高斯过程回归模型}
+
+        高斯过程回归模型(Gaussian process regression, GPR)是基于贝叶斯理论的非参数模型(Non-pararmetric Model). 引入核函数方法使得模型能够对复杂的非线性数据进行拟合. 高斯过程回归建立的模型实际上是整个后验分布, 输出结果包括均值与方差, 因此还能够简单计算出置信区间, 评估预测结果. 要了解GPR其中的一个关键基础是高斯分布.
+
+        % 非参数模型 简单来说就是不对样本的总体分布做假设，直接分析样本的一类统计分析方法。
+
+        \subsubsection{高斯分布及其性质}
+
+            \paragraph{高斯分布}
+
+                \begin{definition}[高斯分布]
+                    一个连续型随机变量$X$其概率密度函数(probability density function, pdf)若为
+                    
+                    \begin{equation}
+                        f(x)=\frac{1}{\sqrt{2\pi}\sigma}\mathrm{exp}\left(-\frac{(x-\mu)^2}{2\sigma^{2}}\right)\qquad x\in \mathds{R}. \label{2.1}
+                    \end{equation}
+
+                    其中$\mu\in\mathds{R}$, $\sigma^{2}\geqslant 0$, 则称$X$服从均值为$\mu$方差为$\sigma^{2}$的高斯分布(Gaussian distribution)或正态分布(normal distribution). 记作$X\sim\mathcal{N}(\mu, \sigma^{2})$
+                \end{definition}
+
+                随机变量的概念很容易推广到多维随机变量(multivariate random variables)或称为随机向量(random vectors). 如有向量$Y=(Y_{1},\dots,Y_{d})^{T}$, 其每一个分量都是定义在同一个概率空间下的随机变量, 此时$Y$即是一个随机向量. 随机向量$Y$的一个样本$y$应有$y\in\mathds{R}^{d}$. 随机向量各个分量是定义在相同概率空间下的, 这使得我们能够研究各分量随机变量间的关系.
+
+                我们可以将与随机变量相关的一些概念也推广到随机向量, 假设$Y=(Y_{1},\dots,Y_{d})^{T}$与$Z=(Z_{1},\dots,Z_{n})^{T}$是两个分别为$d$维与$n$维的随机向量, 我们可以定义随机向量的均值、方差以及两随机向量之间的协方差
+                \begin{align}
+                    &\mathrm{E}(Y)=(\mathrm{E}(Y_{1}),\dots,\mathrm{E}(Y_{d}))^{T}. \\
+                    &\mathrm{var}(Y)=\mathrm{E}(YY^{T})-\mathrm{E}(Y)\mathrm{E}(Y^{T})=\mathrm{E}[(Y-\mathrm{E}(Y))(Y-\mathrm{E}(Y))^{T}]. \\
+                    &\mathrm{cov}(Y, Z)=\mathrm{E}(YZ^{T})-\mathrm{E}(Y)\mathrm{E}(Z^{T}).
+                \end{align}
+
+            \paragraph{多维高斯分布}
+                服从多维高斯分布(multivariate Gaussian distribution)的随机向量是我们需要重点讨论的对象.
+
+                \begin{definition}[多维高斯分布]      
+                    若有随机向量$Y=(Y_{1},\dots,Y_{d})^{T}$, 其分量的任意线性组合而成的随机变量都服从于高斯分布, 即
+                    \begin{equation}
+                        \forall\alpha\in\mathds{R}^{d},\ \alpha_{1}Y_{1}+\dots+\alpha_{d}Y_{d}=\alpha^{T}Y\sim\mathcal{N}.
+                    \end{equation}
+                    此时称随机向量$Y$服从于$d$维高斯分布, $Y$也被称为高斯随机向量.
+                \end{definition}
+
+                $d$维高斯分布的概率密度函数由下式给出.
+
+                \begin{equation}
+                    f_{Y}(y)=\frac{1}{|2\pi\Sigma|^{1/2}}\mathrm{exp}\left(-\frac{1}{2}(y-\mu)^{T}\Sigma^{-1}(y-\mu)\right) \qquad y\in\mathds{R}^{d}. \label{2.6}
+                \end{equation}
+
+                为了表达上的简便有时也简记为
+
+                \begin{equation}
+                    f(y)=\mathcal{N}(\mu, \Sigma)
+                \end{equation}
+
+                上式中$\mu$是$d$维的均值向量(mean vector), 其每个分量$\mu_{i}=\mathrm{E}(Y_{i})$,而$\Sigma$是一个$d\times d$的矩阵, 其$i$行$j$列的分量$\Sigma_{i,j}=\mathrm{cov}(Y_{i},Y_{j})$, 矩阵$\Sigma$被称为协方差矩阵(covariance matrix).
+
+                就像高斯分布能被一组$\mu$与$\sigma^{2}$唯一确定一样, 多维高斯分布的特性也能由均值向量$\mu$与协方差矩阵$\Sigma$唯一确定. 因此服从多维高斯分布的随机向量可记为$Y\sim\mathcal{N}(\mu,\Sigma)$.
+
+                由协方差矩阵定义可以得出协方差矩阵总是对称半正定(symmetric and positive semi-definite)的(证明见附录\ref{A.1}), 即有
+                \begin{align}
+                    &\Sigma_{i,j}=\Sigma_{j,i}. \\
+                    &\forall\alpha\in\mathds{R}^{d},\ \alpha^{T}\Sigma\alpha\geqslant 0.
+                \end{align}
+
+                事实上, 只要是满足上面两条性质的矩阵都可以视为是协方差矩阵. 下面介绍多维高斯分布两个重要的性质, 特别是条件分布的性质在后面有重要应用.
+
+            \paragraph{高斯分布性质}
+                \begin{property}
+                    对于高斯向量来说, 各分量之间不相关等价于各分量之间独立.
+                \end{property}
+
+                这是高斯分布独有的特性, 在非高斯分布的一般条件下变量间独立可推出不相关, 但不相关往往推不出变量间独立. 这个性质利用独立的定义也容易得到证明.
+
+                对于一个各分量之间独立的高斯向量$Y$, 易知其协方差矩阵是一个对角阵, 且对角线元素即各分量的方差.
+
+                \begin{equation}
+                    \Sigma= \begin{pmatrix}
+                                \sigma^{2}_{1} & 0 & \cdots & 0 \\
+                                0 & \sigma^{2}_{2} & \cdots & 0 \\ 
+                                \vdots & \vdots & \ddots & \vdots \\
+                                0 & 0 & \cdots & \sigma^{2}_{d} \\
+                            \end{pmatrix}
+                \end{equation}
+                
+                
+                假设$Y$服从协方差矩阵为$\Sigma$,均值向量为$\mu$的高斯分布, 则$Y$的概率密度函数可拆解为
+                \begin{align}
+                    f(y)&=\frac{1}{|2\pi\Sigma|^{1/2}}\mathrm{exp}\left(-\frac{1}{2}(y-\mu)^{T}\Sigma^{-1}(y-\mu)\right) \notag \\
+                    &=\frac{1}{\sqrt{2\pi\sigma^{2}_{1}}\times \dots\times\sqrt{2\pi\sigma^{2}_{d}}}\mathrm{exp}\left(-\sum^{d}_{i=1}\frac{(y_{i}-\mu_{i})^{2}}{2\sigma^{2}_{i}}\right) \notag \\
+                    &=\prod^{d}_{i=1}f(y_{i}).
+                \end{align}        
+                上式中$f(y_{i})$即$Y_{i}$的概率密度函数, 由独立定义可得$Y$各分量间独立.
+
+                为了研究高斯分布的条件分布, 我们把高斯随机向量划分为两部分, $Y=\left( {Y_{1}\atop Y_{2}}\right)$, $Y_{1}$与$Y_{2}$都可能为高斯随机向量或只是单变量(univariate). 同时也对应将均值向量与协方差矩阵分块
+                \begin{align}
+                    &\mu=   \begin{pmatrix}
+                                    \mu_{1} \\ \mu_{2} \\
+                            \end{pmatrix}.   \\
+                    &\Sigma=\begin{pmatrix}\label{2.13}
+                                \Sigma_{1,1} & \Sigma_{1,2} \\
+                                \Sigma_{2,1} & \Sigma_{2,2} \\
+                            \end{pmatrix}.
+                \end{align}
+
+                在上述设定下, 有以下条件分布性质.
+
+                \begin{property}
+                    已知$Y_{2}$的条件下$Y_{1}$的条件分布也是高斯分布. 若$Y_{1}$为随机向量, 则该条件分布是多维高斯分布, 且该多维高斯分布的均值向量与协方差函数由下式给出(证明见附录\ref{A.2})
+                    \begin{align}
+                        &Y_{1}|Y_{2}\sim\mathcal{N}(\mu_{c}, \Sigma_{c}). \notag \\
+                        &\mu_{c}=\mu_{1}+\Sigma_{1,2}\Sigma_{2,2}^{-1}(Y_{2}-\mu_{2}). \label{muc}\\
+                        &\Sigma_{c}=\Sigma_{1,1}-\Sigma_{1,2}\Sigma^{-1}_{2,2}\Sigma_{2,1}. \label{sigc}
+                    \end{align}
+                \end{property}
+
+        
+        \subsubsection{高斯过程}
+
+            多维随机向量的概念可以推广到随机过程(stochastic processes), 可认为是由多维随机变量推广到了``无限维". 此时, 取这个``无限维"随机向量的有限个分量构成的随机向量将服从于某种分布, 根据服从的分布定义了不同的随机过程, 这里特别重要的是高斯过程.
+
+            \paragraph{高斯过程}
+                \begin{definition}(高斯过程)
+                    若一个定义在域$D\in\mathds{R}^{d}$上的随机过程$Z$, 对于$\forall n\in \mathds{N},\ \forall x_{i}\in D,\ (Z(x_{1}),\dots,Z(x_{n}))$是一个高斯随机向量, 则$Z$是高斯过程(Gaussian Process, GP).
+                \end{definition}
+
+                与高斯分布类似, 高斯过程的性质可以由定义在$D$上的均值函数(mean function)与定义在$D\times D$上的协方差函数(covariance function)完全确定. 通常用$m(x)$与$k(x,x')$来表示均值函数与协方差函数. 
+                \begin{align}
+                    &m(x)=\mathrm{E}(Z(x)) \\
+                    &k(x,x')=\mathrm{cov}(Z(x),Z(x'))
+                \end{align}
+                
+                于是高斯过程$Z$可简记为
+                \begin{equation*}
+                    Z\sim\mathcal{GP}\left(m(x),k(x,x')\right)
+                \end{equation*}
+
+
+            \paragraph{均值函数与协方差函数}    
+                均值函数与协方差函数是高斯过程两个关键要素, 一组均值与协方差函数就唯一确定了一个高斯分布. 常见的均值函数有常数均值函数与线性均值函数等, 其表达式如下\cite{Rasmussen2017}
+                \begin{align}
+                    &\text{常数均值函数}\ m(x)=c \qquad c\in\mathds{R}.\\
+                    &\text{线性均值函数}\ m(x)=\alpha^{T}x \qquad\alpha\in\mathds{R}^{d}.
+                \end{align}
+
+                然而在实际应用中总是先将数据预处理成是$0$均值的, 即使得$m(x)=0$. 这样不仅在理论推导时带来便利, 在实际运算中也提高了效率. 
+
+                对于高斯过程的一个样本$(Z(x_{1}),\dots,Z(x_{n}))$是服从多维高斯分布的, 这个高斯分布的协方差矩阵$K$由协方差函数计算得到
+
+                \begin{equation}
+                    K= \begin{pmatrix}
+                                k(x_{1},x_{1}) & k(x_{1},x_{2}) & \cdots & k(x_{1},x_{n}) \\
+                                k(x_{2},x_{1}) & k(x_{2},x_{2}) & \cdots & k(x_{2},x_{n}) \\
+                                \vdots         & \vdots         & \ddots & \vdots \\
+                                k(x_{n},x_{1}) & k(x_{n},x_{2}) & \cdots & k(x_{n},x_{n}) \\
+                            \end{pmatrix}
+                \end{equation}
+
+                由于协方差矩阵总是对称半正定的(见附录\ref{A.1}), 可以以此来定义半正定函数(positive semi-definite functions), 协方差函数是半正定函数, 事实上任何对称半正定函数都可以视为是协方差函数.
+
+                \begin{definition}(半正定函数)
+                    若定义在$D\times D$的函数$k(\cdot,\cdot)$, 对于$\forall n\in\mathds{N},\ \forall \{x_{1},\cdots,x_{n}\}\in D^{n},\ \forall \alpha\in\mathds{R}^{n},$有
+                    \begin{equation*}
+                        \sum^{n}_{i=1}\sum^{n}_{j=1}\alpha_{i}\alpha_{j}k(x_{i},x_{j})\geqslant 0
+                    \end{equation*}
+                    则$k(\cdot,\cdot)$为半正定函数.
+                \end{definition}
+                
+                协方差函数也被称为核函数(kernel function), 以下用统一采用核函数这一说法. 核函数形式繁多也有多种分类方法, 常见核函数如下
+
+                \begin{table}[h]
+                    \centering
+                    \caption{常见核函数}
+                    \label{核函数}
+                    \begin{tabular}{lll}
+                    \hline
+                    \multicolumn{1}{l}{核函数}   & \multicolumn{1}{l}{表达式} & \multicolumn{1}{l}{参数} \\ \hline
+                    $constant$                    &    $\sigma^{2}_{f}$      &   $\sigma^{2}_{f}$  \\
+                    $linear$                      &  $\sum^{d}_{i=1}\sigma^{2}_{i}x_{i}x'_{i}$ & $\{\sigma^{2}_{1},\dots,\sigma^{2}_{d}\}$        \\
+                    $polynomial$                  &  $(xx'+\sigma^{2}_{f})^{p}$ &     $\sigma^{2}_{f}$    \\
+                    $squared\ exponential$     & $\sigma^{2}_{f}\mathrm{exp}\left(-\frac{\|x-x'\|^{2}}{2l^{2}}\right)$ & $\sigma^{2}_{f},l$   \\
+                    $Mat\acute{e}rn$ &    $\frac{2^{1-v}}{\Gamma(v)} \left(\frac{\sqrt{2v}r}{l}\right)^{v}K_{v}\left(\frac{\sqrt{2v}r}{l}\right)$ &  $v,l$  \\
+                    $exponential$  &   $\sigma^{2}_{f}\mathrm{exp}\left(-\frac{\|x-x'\|}{l}\right)$  &  $\sigma^{2}_{f},l$   \\
+                    $rational\ quadratic$ &   $\sigma^{2}_{f}\left(1+\frac{\|x-x'\|^{2}}{2\alpha l^{2}}\right)^{-\alpha}$  &  $\sigma^{2}_{f},\alpha,l$   \\ \hline
+                    \end{tabular}
+                \end{table}
+
+                核函数中的一大类又被称之为静态核函数(stationary kernel), 如表\ref{核函数}中的SE核(squared exponential)与RQ核(rational quadratic)等, 特点是与输入的$x$与$x'$无关而与$\|x-x'\|$有关, 这些核函数在应用上更为广泛. 另外, 通常一种核函数有两个常用版本即iso形式(isotropic)与ard形式(automatic relevance determination), 两者的差异是输入$x$的各个维度是否使用相同的长度尺度(length scale), iso形式的函数使用相同长度尺度, 而ard使用不同的尺度. 如表\ref{核函数}中的线性核(linear kernel)是其ard版本, 其iso版本为$\sigma^{2}\sum^{d}_{i=1}x_{i}x'_{i}$, 此时核函数参数只有$\sigma^{2}$, 可见ard形式的核函数参数较iso版本多. 表\ref{核函数}中其余除常数核外的核函数皆为iso形式, 同时也各有ard形式的核函数.
+
+        \subsubsection{高斯过程回归}
+            下面进入正题, 即如何运用上述高斯过程理论解决回归问题. Rasmussen在所著的《Gaussian processes in machine learning》一书中提到了两种介绍高斯过程回归的两种思路, 即借助于线性回归的权重空间的观点(weight-space view)和直接的函数空间的观点(function-space view).
+
+            \paragraph{权重空间观点解释}
+                权重空间观点的解释需要借助于贝叶斯线性模型(Bayesian linear model), 贝叶斯线性回归模型是选择模型为线性模型的前提下, 假设权向量$\boldsymbol{w}$的服从先验分布是高斯分布, 再结合贝叶斯理论来解决回归问题. 一个典型的贝叶斯线性模型假设如下(只先考虑基本线性模型,即输入不经过基函数$\boldsymbol{\phi}(\cdot)$映射)
+
+                \begin{equation}
+                    f(\boldsymbol{x})=\boldsymbol{x}^{T}\boldsymbol{w},\qquad y=f(\boldsymbol{x})+\varepsilon.
+                \end{equation}
+
+                同时假设噪声$\varepsilon$服从于独立的均值为0, 方差为$\sigma^{2}_{n}$的高斯分布, 即$\varepsilon\sim\mathcal{N}(0,\sigma^{2}_{n})$. 在此假设下, 我们可以得到在已知$\boldsymbol{x}$与$\boldsymbol{w}$的条件下$y$的条件分布是高斯分布, 即
+
+                \begin{equation}\label{2.22}
+                    y|\boldsymbol{x},\boldsymbol{w}\sim\mathcal{N}(\boldsymbol{x}^{T}\boldsymbol{w}, \sigma^{2}_{n}).
+                \end{equation}
+
+                为了求解$\boldsymbol{w}$进行$n$次采样得到训练数据集$\boldsymbol{X}=(\boldsymbol{x}_{1},\cdots,\boldsymbol{x}_{n})$与$\boldsymbol{y}=(y_{1},\cdots,y_{n})$, 利用最大似然估计法(maximum likelihood estimation, MLE)估计$\boldsymbol{w}$. 可写出似然函数
+
+                \begin{equation}\label{2.23}
+                    \begin{aligned}
+                        p(\boldsymbol{y}|\boldsymbol{X},\boldsymbol{w})
+                        &=\prod^{n}_{i=1}p(y_{i}|\boldsymbol{x}_{i},\boldsymbol{w})=\prod^{n}_{i=1}\frac{1}{\sqrt{2\pi}\sigma_{n}}\mathrm{exp}\left(-\frac{(y_{i}-\boldsymbol{x}^{T}_{i}\boldsymbol{w})^{2}}{2\sigma^{2}_{n}}\right) \\
+                        &=\frac{1}{(2\pi\sigma^{2}_{n})^{n/2}}\mathrm{exp}\left(-\frac{1}{2\sigma^{2}_{n}}(\boldsymbol{y}-\boldsymbol{X}^{T}\boldsymbol{w})^{T}(\boldsymbol{y}-\boldsymbol{X}^{T}\boldsymbol{w})\right)\\
+                        &=\mathcal{N}(\boldsymbol{X}^{T}\boldsymbol{w},\sigma^{2}_{n}\boldsymbol{I}).
+                    \end{aligned}
+                \end{equation}
+
+                上式成立需满足两个条件, 一是各次采样值之间独立同分布, 二是各次采样噪声$\varepsilon$也是独立同分布的, 这些条件包含在模型假设中. 为了利用贝叶斯理论得到$\boldsymbol{w}$后验分布, 我们需要先假设$\boldsymbol{w}$的先验分布
+
+                \begin{equation}\label{2.24}
+                    \boldsymbol{w}\sim\mathcal{N}(\boldsymbol{0},\Sigma_{p}).
+                \end{equation}
+
+                然后利用贝叶斯公式计算$\boldsymbol{w}$的后验概率$p(\boldsymbol{w}|\boldsymbol{y},\boldsymbol{X})$.
+
+                \begin{equation}\label{2.25}
+                    p(\boldsymbol{w}|\boldsymbol{X},\boldsymbol{y})=\frac{p(\boldsymbol{y}|\boldsymbol{X},\boldsymbol{w})p(\boldsymbol{w})}{p(\boldsymbol{y}|\boldsymbol{X})}.
+                \end{equation}
+
+                上式中的分母是与$\boldsymbol{w}$无关的, 在此视为常数因子. 将式\ref{2.23}, 式\ref{2.24}代入式\ref{2.25}进行整理(详细推导过程见附录\ref{A.3}).
+                \begin{align}\label{2.26}
+                    p(\boldsymbol{w}|\boldsymbol{X},\boldsymbol{y})
+                    &\propto p(\boldsymbol{y}|\boldsymbol{X},\boldsymbol{w})p(\boldsymbol{w}) \notag\\
+                    &\propto \mathrm{exp}\left(-\frac{1}{2}(\boldsymbol{w}-\boldsymbol{\bar{w}})^{T}(\frac{1}{\sigma^{2}_{n}}\boldsymbol{X}\boldsymbol{X}^{T}+\Sigma^{-1}_{p})(\boldsymbol{w}-\boldsymbol{\bar{w}})\right).
+                \end{align}
+
+                若记$A=\sigma^{-2}_{n}\boldsymbol{XX}^{T}+\Sigma^{-1}_{p}$, 则上式中$\boldsymbol{\bar{w}}=\sigma^{-2}_{n}A^{-1}\boldsymbol{Xy}$, 于是我们得到$\boldsymbol{w}|\boldsymbol{X},\boldsymbol{y}$也是服从高斯分布的, 即
+
+                \begin{equation}\label{2.27}
+                    \boldsymbol{w}|\boldsymbol{X},\boldsymbol{y}\sim\mathcal{N}(\boldsymbol{\bar{w}},A^{-1}).
+                \end{equation}
+
+                有了$\boldsymbol{w}|\boldsymbol{X},\boldsymbol{y}$的后验分布, 如果有新的样本$\boldsymbol{x}_{*}$, 记$f_{*}=f(\boldsymbol{x}_{*})$, 于是可以求得$f_{*}|\boldsymbol{x}_{*},\boldsymbol{X},\boldsymbol{y}$的预测分布(predictive distribution)以实现预测(详细推导过程见附录\ref{A.4}).
+
+                \begin{equation}\label{2.28}
+                    \begin{aligned}
+                    p(f_{*}|\boldsymbol{x}_{*},\boldsymbol{X},\boldsymbol{y})
+                    &=\int p(f_{*}|\boldsymbol{x}_{*},\boldsymbol{w})p(\boldsymbol{w}|\boldsymbol{X},\boldsymbol{y}) \mathrm{d}\boldsymbol{w} \\
+                    &=\mathcal{N}(\frac{1}{\sigma^{2}_{n}}\boldsymbol{x}^{T}_{*}A^{-1}\boldsymbol{Xy},\boldsymbol{x}^{T}_{*}A^{-1}\boldsymbol{x}_{*})
+                    \end{aligned}
+                \end{equation}
+                
+                可见$f_{*}|\boldsymbol{x}_{*},\boldsymbol{X},\boldsymbol{y}$的预测分布依然是服从高斯分布的.
+
+                如果在线性回归基本形式的基础上运用基函数$\boldsymbol{\phi}(\cdot)$将输入$\boldsymbol{x}$向高维映射, 这样就可能将线性回归方法用于非线性数据的建模. 此时模型为
+
+                \begin{equation} \label{2.29}
+                    f(\boldsymbol{x})=\boldsymbol{\phi}(\boldsymbol{x})\boldsymbol{w}
+                \end{equation}
+
+                经过基函数的映射, 在预测分布的推导上没有什么不同, 只是将$\boldsymbol{x}$用$\boldsymbol{\phi}(\boldsymbol{x})$替代. 并记输入数据集$\boldsymbol{X}$经过基函数映射结果为$\boldsymbol{\varPhi}$,$A=\sigma^{-2}_{n}\boldsymbol{\varPhi}\boldsymbol{\varPhi}^{T}+\Sigma^{-1}_{p}$.
+
+                \begin{equation} \label{2.30}
+                    f_{*}|\boldsymbol{x}_{*},\boldsymbol{X},\boldsymbol{y}\sim\mathcal{N}\left(\frac{1}{\sigma^{2}_{n}}\boldsymbol{\phi}(\boldsymbol{x}_{*})^{T}A^{-1}\boldsymbol{\varPhi y},\boldsymbol{\phi}(\boldsymbol{x}_{*})^{T}A^{-1}\boldsymbol{\phi}(\boldsymbol{x}_{*})\right)
+                \end{equation}
+
+                为了与函数空间观点做对比, 对上式进行变形(见附录\ref{A.5}), 并记$K=\boldsymbol{\varPhi}^{T}\Sigma_{p}\boldsymbol{\varPhi}$, $\boldsymbol{\phi}(\boldsymbol{x}_{*})=\boldsymbol{\phi}_{*}$, 得
+
+                \begin{equation}\label{2.31}
+                    \begin{aligned}
+                        f_{*}|\boldsymbol{x}_{*},\boldsymbol{X},\boldsymbol{y}\sim\mathcal{N}\Bigl(
+                        &\boldsymbol{\phi}^{T}_{*}\Sigma_{p}\boldsymbol{\varPhi}(K+\sigma^{2}_{n}I)^{-1}\boldsymbol{y}, \\
+                        &\boldsymbol{\phi}^{T}_{*}\Sigma_{p}\boldsymbol{\phi}_{*} -  \boldsymbol{\phi}^{T}_{*}\Sigma_{p}\boldsymbol{\varPhi}(K+\sigma^{2}_{n}I)^{-1} \boldsymbol{\varPhi}^{T}\Sigma_{p}\boldsymbol{\phi}_{*}\Bigl)
+                    \end{aligned}
+                \end{equation}
+
+                上式中各部分总是以$\boldsymbol{\phi}^{T}_{*}\Sigma_{p}\boldsymbol{\phi}_{*}$,\ $\boldsymbol{\phi}^{T}_{*}\Sigma_{p}\boldsymbol{\varPhi}$或$\boldsymbol{\varPhi}^{T}\Sigma_{p}\boldsymbol{\phi}_{*}$的内积形式出现. 由于$\Sigma_{p}$是协方差矩阵, 其为对称半正定矩阵, 我们总能找到矩阵$\Sigma^{1/2}_{p}$, 使得$\Sigma^{1/2}_{p}(\Sigma^{1/2}_{p})^{T}=\Sigma_{p}$(待证明, 可以用特征值分解来说明). 于是我们可以定义一个函数
+                
+                \begin{equation}\label{2.32}
+                    \begin{aligned}
+                        k(\boldsymbol{x},\boldsymbol{x}')&=\boldsymbol{\phi}(\boldsymbol{x})^{T}\Sigma_{p}\boldsymbol{\phi}(\boldsymbol{x}') \\
+                        &=\boldsymbol{\phi}(\boldsymbol{x})^{T}\Sigma^{1/2}_{p}(\Sigma^{1/2}_{p})^{T}\boldsymbol{\phi}(\boldsymbol{x}') \\
+                        &=[(\Sigma^{1/2}_{p})^{T}\boldsymbol{\phi}(\boldsymbol{x})]^{T}(\Sigma^{1/2}_{p})^{T}\boldsymbol{\phi}(\boldsymbol{x}') \\
+                        &=\boldsymbol{\psi}(\boldsymbol{x})^{T}\boldsymbol{\psi}(\boldsymbol{x}')
+                    \end{aligned}
+                \end{equation}
+
+                上式在函数空间的观点下就被称之为协方差函数或核函数, 从中也可以看到核函数与基函数之间的联系, 两种观点由式\ref{2.32}连接.
+
+            \paragraph{函数空间观点解释}
+
+                函数空间观点的解释将很大程度依赖于高斯分布的性质. 假设$f$是定义在域$D$上的高斯分布,并假设其均值为$0$, 协方差函数为$k(\boldsymbol{x},\boldsymbol{x}')$, 即
+
+                \begin{equation}
+                    f\sim\mathcal{GP}\left(0, k(\boldsymbol{x}, \boldsymbol{x}')\right).
+                \end{equation}
+                
+                
+                经过采样得到训练数据集$\{(\boldsymbol{x}_{i},f_{i})|i=1,\dots,n\}$,记$\boldsymbol{f}=f(\boldsymbol{X})$, 同样$\{(\boldsymbol{X}_{*}, \boldsymbol{f}_{*})\}$为测试数据集. 先讨论无噪声(noise-free)的情况, 即认为观测值没有噪声叠加在上面, 此时的模型为
+
+                \begin{equation}
+                    y=f(\boldsymbol{x}).
+                \end{equation}
+
+                由高斯过程的定义可知, $(\boldsymbol{f}, \boldsymbol{f}_{*})$是联合分布是多维高斯分布, 同时将协方差矩阵分块处理
+
+                \begin{equation}\label{2.35}
+                    \left[\begin{aligned}
+                        \boldsymbol{f}\ \\
+                        \boldsymbol{f}_{*}
+                    \end{aligned}\right]
+                    \sim\mathcal{N}\left(0,\
+                    \begin{bmatrix}
+                        &K(\boldsymbol{X}, \boldsymbol{X})     &K(\boldsymbol{X}, \boldsymbol{X}_{*}) \\
+                        &K(\boldsymbol{X}_{*}, \boldsymbol{X}) &K(\boldsymbol{X}_{*}, \boldsymbol{X}_{*})
+                    \end{bmatrix}\right).
+                \end{equation}
+
+                利用高斯分布条件分布的性质和式\ref{muc}与式\ref{sigc}易得
+
+                \begin{equation}
+                    \begin{aligned}
+                        \boldsymbol{f}_{*}|\boldsymbol{X}_{*},\boldsymbol{X},\boldsymbol{f}\sim\mathcal{N}(&K\bigl(\boldsymbol{X}_{*},\boldsymbol{X})K(\boldsymbol{X},\boldsymbol{X})^{-1}\boldsymbol{f}, \\
+                        &K(\boldsymbol{X}_{*},\boldsymbol{X}_{*})-K(\boldsymbol{X}_{*},\boldsymbol{X})K(\boldsymbol{X},\boldsymbol{X})^{-1}K(\boldsymbol{X},\boldsymbol{X}_{*})\bigl).
+                    \end{aligned}
+                \end{equation}
+
+                若考虑噪声, 此时$y$与$f$不再相同, 模型为
+
+                \begin{equation}
+                    y=f(\boldsymbol{x})+\varepsilon.
+                \end{equation}
+
+                假设各次采样噪声$\varepsilon\sim\mathcal{N}(0, \sigma^{2}_{n})$. 在计算协方差矩阵的每一项时需要考虑噪声方差.
+
+                \begin{equation}
+                    \mathrm{cov}(y_{p},y_{q})=k(\boldsymbol{x}_{p}, \boldsymbol{x}_{q})+\sigma^{2}_{n}\delta_{pq}.
+                \end{equation}
+
+                其中$\delta_{pq}$为克罗内克函数(Kronecker delta function), 其形式为
+                \begin{equation}
+                    \delta_{pq}=
+                    \begin{cases} 
+                        1 & \quad p=q,\\ 
+                        0 & \quad p\neq q.
+                    \end{cases}
+                \end{equation}
+
+                或从协方差的角度看
+
+                \begin{equation}
+                    \mathrm{cov}(\boldsymbol{y})=K(\boldsymbol{X}, \boldsymbol{X}) + \sigma^{2}_{n}I.
+                \end{equation}
+            
+                故式\ref{2.35}改写为
+
+                \begin{equation}\label{2.41}
+                    \left[\begin{aligned}
+                        \boldsymbol{y}\ \\
+                        \boldsymbol{f}_{*}
+                    \end{aligned}\right]
+                    \sim\mathcal{N}\left(0,\
+                    \begin{bmatrix}
+                        &K(\boldsymbol{X}, \boldsymbol{X}) + \sigma^{2}_{n}I    &K(\boldsymbol{X}, \boldsymbol{X}_{*}) \\
+                        &K(\boldsymbol{X}_{*}, \boldsymbol{X}) &K(\boldsymbol{X}_{*}, \boldsymbol{X}_{*})
+                    \end{bmatrix}\right).
+                \end{equation}
+
+                于是含噪声情况下高斯过程回归的预测分布为
+
+                \begin{equation}
+                    \boldsymbol{f}_{*}|\boldsymbol{X}_{*},\boldsymbol{X},\boldsymbol{y}\sim\mathcal{N}(\boldsymbol{\bar{f}}_{*},\ \mathrm{cov}(\boldsymbol{f}_{*}))\label{2.42}
+                \end{equation}
+                \begin{align}
+                    \boldsymbol{\bar{f}}_{*}&=K\bigl(\boldsymbol{X}_{*},\boldsymbol{X})[K(\boldsymbol{X},\boldsymbol{X})+\sigma^{2}_{n}I]^{-1}\boldsymbol{y} \label{2.43}\\
+                    \mathrm{cov}(\boldsymbol{f}_{*})&=K(\boldsymbol{X}_{*},\boldsymbol{X}_{*})-K(\boldsymbol{X}_{*},\boldsymbol{X})[K(\boldsymbol{X},\boldsymbol{X})+\sigma^{2}_{n}I]^{-1}K(\boldsymbol{X},\boldsymbol{X}_{*}). \label{2.44}
+                \end{align}
+
+                对比发现式\ref{2.42}, \ref{2.43}, \ref{2.44}与式\ref{2.31}本质上是一致的. 从两种观点都可以推出预测分布的形式.
+
+
+    \subsection{高斯过程回归模型的求解}
+
+        \subsubsection{核函数选择}
+            除了表\ref{核函数}中的单个核函数外, 通过核函数的组合可以生成更多的核函数以建立更复杂的回归模型. 事实上简单的组合方式如两核函数相加, 或两核函数做乘积等, 结果依然满足核函数的性质(半正定), 于是就可以从已有的函数构造出新的核函数\cite{rasmussen2006gaussian}. 在一般的回归问题中, SE核被证明是拟合数据最有效的, 因此往往被作为首选.
+
+        \subsubsection{超参数估计}
+            选定核函数后所要做的就是用训练数据来估计得到核函数中的超参数(hyperparameters), 这些参数确定后, 模型才最终确定, 然后用于预测或回归.
+
+            估计核函数参数的方法常用的有两种, 一是最大似然估计(Maximum likelihood estimation, MLE), 另一种是基于交叉验证的误差最小化.
+
+            \paragraph{最大似然估计}
+                最大似然估计本质上是使用对数损失函数(logarithmic loss function)的经验风险最小化(empirical risk minimization, ERM)方法.
+
+                在高斯过程的模型下, 设模型参数向量$\boldsymbol{\theta}$, 假设各次采样值$\boldsymbol{y}\in\mathds{R}^{d}$独立同分布于同一个高斯分布. 记$\Sigma_{xx}=K(\boldsymbol{X},\boldsymbol{X})$, $\Sigma_{yy}=\mathrm{cov}(\boldsymbol{y})$.
+
+                \begin{equation}
+                    \begin{aligned}
+                        p(\boldsymbol{y};\boldsymbol{\theta}) &= \frac{1}{\sqrt{(2\pi)^{d}|\Sigma_{yy}|}}\mathrm{exp}\left(-\frac{1}{2}\boldsymbol{y}^{T}\Sigma_{yy}^{-1}\boldsymbol{y} \right) \\
+                        &= \frac{1}{\sqrt{(2\pi)^{d}|\Sigma_{yy}|}}\mathrm{exp}\left(-\frac{1}{2}\boldsymbol{y}^{T}( \Sigma_{xx} + \sigma^{2}_{n}I)^{-1}\boldsymbol{y} \right).
+                    \end{aligned}
+                \end{equation}
+
+                $n$次采样可写出似然函数
+
+                \begin{equation}
+                    L(\boldsymbol{Y};\boldsymbol{\theta})=\prod^{n}_{i=1}p(\boldsymbol{y}_{i};\boldsymbol{\theta})= (\frac{1}{\sqrt{(2\pi)^{d}|\Sigma_{yy}|}})^{n}\mathrm{exp}\left(-\frac{1}{2}\sum\limits^{n}_{i=1}\boldsymbol{y}^{T}_{i}\Sigma_{yy}^{-1}\boldsymbol{y}_{i}\right).
+                \end{equation}
+
+                \begin{equation}
+                    \mathrm{log}(L(\boldsymbol{Y};\boldsymbol{\theta})) = -\frac{dn}{2}\mathrm{log}(2\pi) - \frac{n}{2}\mathrm{log}(|\Sigma_{yy}|) - \frac{1}{2}\sum\limits^{n}_{i=1}\boldsymbol{y}^{T}_{i}\Sigma_{yy}^{-1}\boldsymbol{y}_{i}.
+                \end{equation}
+
+                为求解
+                \begin{equation}
+                    \max_{\boldsymbol{\theta}} \ L(\boldsymbol{Y};\boldsymbol{\theta}).
+                \end{equation}
+
+
+                简化为计算：
+                \begin{equation}
+                    \min_{\boldsymbol{\theta}} \ -2\mathrm{log}(L(\boldsymbol{Y};\boldsymbol{\theta})) = \min_{\boldsymbol{\theta}} \ dn\mathrm{log}(2\pi)+n\mathrm{log}(|\Sigma_{yy}|)+\sum\limits^{n}_{i=1}(\boldsymbol{y}_{i}^{T}\Sigma_{yy}^{-1}\boldsymbol{y}_{i}).
+                \end{equation}
+
+                \begin{equation}
+                    \boldsymbol{\theta}=\mathrm{argmin} \ dn\mathrm{log}(2\pi)+n\mathrm{log}(|\Sigma_{yy}|)+\sum\limits^{n}_{i=1}(\boldsymbol{y}_{i}^{T}\Sigma_{yy}^{-1}\boldsymbol{y}_{i}).
+                \end{equation}
+
+            \paragraph{基于交叉验证的误差最小化}
+                最大似然估计虽然简单, 但也有不小的问题, 即得到的参数容易发生过拟合, 也就是模型的泛化能力较差, 对新的输入不能很好得预测. 交叉验证是一种常用的估算模型测试误差的方法, 可以用来选择模型. 用测试误差评定模型的优劣往往更合理. 交叉验证通常使用k折(k-fold)来处理训练数据, 即把训练数据分成k份, 每次取其中一份作为测试集, 其余k-1份作为训练集, 于是每一次都能计算出预测误差(如均方误差MSE), 轮流作测试集后将求平均误差作为对模型测试误差的估计. 求解参数的过程即使得测试误差最小.
+
+                \begin{equation}
+                    MSE_{CV}(\boldsymbol{\theta})=\frac{1}{k}\sum^{k}_{i=1}MSE_{i}.
+                \end{equation}
+
+                \begin{equation}
+                    MSE_{i}=\frac{1}{m_{i}} \sum^{m_{i}}_{j=1}\|\boldsymbol{y}_{ij}-\boldsymbol{\hat{y}}_{ij}\|^{2}.
+                \end{equation}
+
+                上式中$m_{i}$为第$i$组作为测试集时包含的样本数. 求解优化问题
+
+                \begin{equation}
+                    \min_{\boldsymbol{\theta}} MSE_{CV}(\boldsymbol{\theta}).
+                \end{equation}
+                
+
+                \begin{equation}
+                    \boldsymbol{\theta}=\mathrm{argmin}\ MSE_{CV}.
+                \end{equation}
+
+            然而在试验中发现, 基于交叉验证的估计方法所建模型的预测效果并没有明显地好于使用最大似然估计, 甚至有时稍差, 而且计算量更大, 故接下来的试验都使用MLE求解模型.
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,25 @@
+\BOOKMARK [1][-]{section*.1}{中文摘要\(关键词\)}{}% 1
+\BOOKMARK [1][-]{section.1}{高斯过程回归理论}{}% 2
+\BOOKMARK [2][-]{subsection.1.1}{高斯过程回归模型}{section.1}% 3
+\BOOKMARK [3][-]{subsubsection.1.1.1}{高斯分布及其性质}{subsection.1.1}% 4
+\BOOKMARK [4][-]{paragraph.1.1.1.1}{高斯分布}{subsubsection.1.1.1}% 5
+\BOOKMARK [4][-]{paragraph.1.1.1.2}{多维高斯分布}{subsubsection.1.1.1}% 6
+\BOOKMARK [4][-]{paragraph.1.1.1.3}{高斯分布性质}{subsubsection.1.1.1}% 7
+\BOOKMARK [3][-]{subsubsection.1.1.2}{高斯过程}{subsection.1.1}% 8
+\BOOKMARK [4][-]{paragraph.1.1.2.1}{高斯过程}{subsubsection.1.1.2}% 9
+\BOOKMARK [4][-]{paragraph.1.1.2.2}{均值函数与协方差函数}{subsubsection.1.1.2}% 10
+\BOOKMARK [3][-]{subsubsection.1.1.3}{高斯过程回归}{subsection.1.1}% 11
+\BOOKMARK [4][-]{paragraph.1.1.3.1}{权重空间观点解释}{subsubsection.1.1.3}% 12
+\BOOKMARK [4][-]{paragraph.1.1.3.2}{函数空间观点解释}{subsubsection.1.1.3}% 13
+\BOOKMARK [2][-]{subsection.1.2}{高斯过程回归模型的求解}{section.1}% 14
+\BOOKMARK [3][-]{subsubsection.1.2.1}{核函数选择}{subsection.1.2}% 15
+\BOOKMARK [3][-]{subsubsection.1.2.2}{超参数估计}{subsection.1.2}% 16
+\BOOKMARK [4][-]{paragraph.1.2.2.1}{最大似然估计}{subsubsection.1.2.2}% 17
+\BOOKMARK [4][-]{paragraph.1.2.2.2}{基于交叉验证的误差最小化}{subsubsection.1.2.2}% 18
+\BOOKMARK [1][-]{section*.3}{参考文献}{}% 19
+\BOOKMARK [1][-]{section*.4}{附录 A}{}% 20
+\BOOKMARK [2][-]{subsection.10.1}{协方差矩阵性质}{section*.4}% 21
+\BOOKMARK [2][-]{subsection.10.2}{高斯条件分布}{section*.4}% 22
+\BOOKMARK [2][-]{subsection.10.3}{贝叶斯线性模型bold0mu mumu wwwwww的后验分布推导}{section*.4}% 23
+\BOOKMARK [2][-]{subsection.10.4}{贝叶斯线性模型预测分布推导}{section*.4}% 24
+\BOOKMARK [2][-]{subsection.10.5}{贝叶斯线性模型预测分布变形}{section*.4}% 25

@@ -1,0 +1,26 @@
+\begin{thebibliography}{3}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{#1}
+\expandafter\ifx\csname urlstyle\endcsname\relax\relax\else
+  \urlstyle{same}\fi
+\providecommand{\href}[2]{\url{#2}}
+\providecommand{\doi}[1]{\href{https://doi.org/#1}{#1}}
+
+\bibitem[{Carl Edward Rasmussen, Hannes Nickisch}(2017)]{Rasmussen2017}
+{Carl Edward Rasmussen, Hannes Nickisch}.
+\newblock The gpml toolbox version 4.1\allowbreak[EB/OL].
+\newblock 2017.
+
+\bibitem[{C. E. Rasmussen, C. K. I. Williams}(2006)]{rasmussen2006gaussian}
+{C. E. Rasmussen, C. K. I. Williams}.
+\newblock Gaussian processes in machine learning\allowbreak[M].
+\newblock Cambridge: the MIT Press, 2006.
+
+\bibitem[{N. Durrande}(2017)]{Durrande2017}
+{N. Durrande}.
+\newblock Lecture notes on gaussian process regression\allowbreak[EB/OL].
+\newblock 2017.
+\newblock
+  \url{https://github.com/NicolasDurrande/Gaussian-Process-Regression-handout}.
+
+\end{thebibliography}

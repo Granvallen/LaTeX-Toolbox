@@ -1,0 +1,22 @@
+\begin{thebibliography}{1}
+
+\bibitem{zhangjiangfan2017}
+张江帆.
+\newblock 基于高斯过程回归的锂电池数据处理.
+\newblock {\em 北京交通大学}, 2017.
+
+\bibitem{rasmussen2006gaussian}
+{C. E. Rasmussen, C. K. I. Williams}.
+\newblock {\em Gaussian processes in machine learning}.
+\newblock the MIT Press, Cambridge, 2006.
+
+\bibitem{Rasmussen2017}
+{Carl Edward Rasmussen, Hannes Nickisch}.
+\newblock The gpml toolbox version 4.1.
+\newblock 2017.
+
+\bibitem{Durrande2017}
+{N. Durrande}.
+\newblock Lecture notes on gaussian process regression, 2017.
+
+\end{thebibliography}

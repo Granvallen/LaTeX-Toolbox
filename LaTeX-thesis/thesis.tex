@@ -1,0 +1,295 @@
+%- 导言区开始 - by Granvallen
+% #region
+\documentclass[a4paper,12pt,twoside]{article} % 注意单页时是不分奇偶页的 
+% twoside 双页 oweside 单页
+
+    %- Font -
+    \usepackage[slantfont,boldfont,AutoFakeBold=true]{xeCJK} % XeCJK中文排版支持 
+        % AutoFakeBold=false % 能解决pdf复制出来乱码的问题 但问题是这样的话要自己设置粗体才能用粗体(原来默认是提供一个伪粗体显示) 可以通过\bfseries命令使之变成粗体
+        % 所以要么使用黑体来代替 要么单独找 粗宋体字体. 另外的解决办法是用 Adobe Song Std 代替 宋体
+        \setmainfont{Times New Roman} % 设置英文字体
+        % \setCJKmonofont{Adobe Song Std} % 设置缺省中文字体
+        \setCJKmainfont{SimSun} % 设置中文字体 宋体  YouYuan  NSimSun
+        \newCJKfontfamily\YouYuan{YouYuan} % 设置其他中文字体命令 幼圆
+        \newCJKfontfamily\SimSun{SimSun}
+        \xeCJKEditPunctStyle{quanjiao}{bound-margin-ratio = 0.25} % 符号缩进
+        %\parindent = 2em   % 段首缩进  % 后面使用 indentfirst 宏包实现缩进比较好
+    \usepackage{fontspec} % 字体命令
+       \newfontfamily\monaco{Monaco} % 这里英语的字体命令是有用的, 中文的就不行 可能是被XeCJK覆盖了
+
+    %- Font CMD -
+    % 常用命令
+    % \bfseries{} -> 加粗
+    % \slshape{} -> 斜体
+    % \boldsymbol{} -> 粗体字母 表示向量与矩阵
+    % 字体大小命令 使用 {\chuhao XXX}
+    \newcommand{\chuhao}{\fontsize{42pt}{\baselineskip}\selectfont}
+    \newcommand{\xiaochuhao}{\fontsize{36pt}{\baselineskip}\selectfont}
+    \newcommand{\yihao}{\fontsize{28pt}{\baselineskip}\selectfont}
+    \newcommand{\erhao}{\fontsize{21pt}{\baselineskip}\selectfont}
+    \newcommand{\xiaoerhao}{\fontsize{18pt}{\baselineskip}\selectfont}
+    \newcommand{\sanhao}{\fontsize{15.75pt}{\baselineskip}\selectfont}
+    \newcommand{\sihao}{\fontsize{14pt}{\baselineskip}\selectfont}
+    \newcommand{\xiaosihao}{\fontsize{12pt}{\baselineskip}\selectfont}
+    \newcommand{\wuhao}{\fontsize{10.5pt}{\baselineskip}\selectfont}
+    \newcommand{\xiaowuhao}{\fontsize{9pt}{\baselineskip}\selectfont}
+    \newcommand{\liuhao}{\fontsize{7.875pt}{\baselineskip}\selectfont}
+    \newcommand{\qihao}{\fontsize{5.25pt}{\baselineskip}\selectfont}
+
+    %- Math -
+    \usepackage{amsmath, amsthm, amssymb} % 数学支持
+        % 定理环境风格
+        \theoremstyle{definition}   
+        %\theoremstyle{plain}
+        %\theoremstyle{remark}
+        % 定理 定义 性质 
+        \newtheorem{definition}{定义}[section] % 定义环境
+        \newtheorem{theorem}{定理}[section] % 定理环境
+        \newtheorem{property}{性质}[section] % 性质环境
+        % 证明环境
+        % \newenvironment{pf}{{\noindent\bf 证明:}\quad}{\hfill $\qed$\par}  
+        \newenvironment{pf}[1]{\par \textbf{证明}\quad #1}{\hfill$\qed$ \par}
+        \renewcommand*{\qedsymbol}{[证毕]}
+        % 公式编号
+        \numberwithin{equation}{section} % 公式编号随章节走
+    % 其他数学字体支持
+    \usepackage{mathrsfs} % 字母花体
+    \usepackage{dsfont} % 漂亮的R
+
+    %- Page -
+    \usepackage{geometry}
+        \geometry{
+            paper=a4paper,
+            left=2.5cm,   % 页边距设定
+            right=2.5cm,
+            top=3.0cm, 
+            bottom=2.5cm, 
+            headsep=0.7cm, % 页眉到正文距离
+            foot=0.7cm, % 页脚到正文距离
+        }
+    \usepackage{titlesec} % 设置标题显示格式 一级标题 二级标题
+        % \titleformat{\part}{\centering\sanhao\bfseries}{\thepart}{1em}{}% 设置part格式 居中 字体3号 加粗 
+        \titleformat{\section}{\sanhao\bfseries}{\thesection}{1em}{}
+        \titleformat{\subsection}{\sihao\bfseries}{\thesubsection}{1em}{}
+        \titleformat{\subsubsection}{\xiaosihao\bfseries}{\thesubsubsection}{1em}{}
+        \titleformat{\paragraph}{\xiaosihao\bfseries}{\theparagraph}{1em}{}
+    \usepackage{titletoc} % 定制目录显示格式
+        % \titlecontents{part}[0em] % 标签距离页面左边距
+        %     {\xiaosihao\bfseries} % 字体
+        %     {\contentslabel{1em}}  % 标签距离目录内容距离
+        %     {}
+        %     {\titlerule*{$\dots$}\contentspage\hspace*{0em}} % 指引线与页码
+        % \titlecontents{section}[2em] % 标签距离页面左边距
+        %     {\xiaosihao} % 字体
+        %     {\contentslabel{1em}}  % 标签距离目录内容距离
+        %     {}
+        %     {\titlerule*{$\cdots$}\contentspage\hspace*{1em}} % 指引线与页码
+        % \titlecontents{subsection}[3em] % 标签距离页面左边距
+        %     {\xiaosihao} % 字体
+        %     {\contentslabel{2em}}  % 标签距离目录内容距离
+        %     {}
+        %     {\titlerule*{$\cdots$}\contentspage\hspace*{1em}} % 指引线与页码
+        % \titlecontents{subsubsection}[4em] % 标签距离页面左边距
+        %     {\xiaosihao} % 字体
+        %     {\contentslabel{3em}}  % 标签距离目录内容距离
+        %     {}
+        %     {\titlerule*{$\cdots$}\contentspage\hspace*{1em}} % 指引线与页码
+    \usepackage{fancyhdr} % 页眉页脚设定
+        \pagestyle{fancy}
+        \fancyhf{} 
+        % 页眉页脚分割线 
+        \renewcommand{\headrulewidth}{0.4pt}
+        % \renewcommand{\footrulewidth}{0.4pt}
+        % 页眉页脚设定 有两种方法
+        % 1
+        % \fancyhead[OC]{\wuhao XX大学学士学位论文} % OC 表示设定奇数页的中间 默认是偶数页
+        % \fancyhead[C]{\wuhao 基于XX}
+        \fancyfoot[C]{\wuhao\thepage} 
+        % 2  这种方法好像无法设定奇偶页区分显示
+        % \lhead{} % 页眉左侧内容
+        % \chead{\wuhao XX大学学士学位论文}
+        % \rhead{} 
+        % \lfoot{}
+        % \cfoot{}
+    
+    %- Paragraph -
+    \usepackage{indentfirst} % 设置首行缩进
+        \setlength{\parindent}{2em}
+    \linespread{1.25} % 行距
+    % \setlength{\columnsep}{1em} %列间距  好像不管用
+    % \setlength{\topmargin}{10mm} % 页眉到页边的距离
+    % \setlength{\parskip}{10pt}  % 设置部分段落间隔
+
+    %- TIKZ -
+    \usepackage{tikz,pgfplots} % 画图支持    如用 matlab2tikz 的输出需要 pgfplots
+        \usetikzlibrary{graphs,arrows,shapes,chains,quotes,plotmarks}
+    \pgfplotsset{compat=1.16}
+    \newenvironment{flowchart}{ % 一个画流程图环境
+        \begin{tikzpicture}[
+        %inner sep=2mm, % 边框到形状内字符距离
+        > = stealth, % 箭头样式
+        -> /.style={thick ,black},
+        -- /.style={thick ,black},
+        line width=1pt,
+        every edge quotes/.style={font=\sihao,auto}, % 标签样式
+        every node/.style={font=\sihao}, % 框内字体
+        point/.style={inner sep=0pt,line width=0pt,fill}, % point样式
+        terminal/.style={circle,draw,thin,inner sep=0pt}, % 结点样式
+        rect/.style={rectangle,rounded corners=1mm,draw,thick,inner sep=5pt,minimum size=10mm,align=center}, %rect样式
+        operation/.style={circle,draw,thick,inner sep=-1pt}, % operation样式
+        hv path/.style={to path={-| (\tikztotarget)}}, % 直角折线
+        vh path/.style={to path={|- (\tikztotarget)}},
+        ]}{\end{tikzpicture}}
+    
+    %- Table -
+    \usepackage{multirow}
+    \usepackage{longtable} % 跨页表格支持 
+    \renewcommand\arraystretch{1.5} % 表格行距
+    \renewcommand\tabcolsep{3mm} % 表格列距
+    \renewcommand\tablename{表} % 改表的标号
+
+    %- Picture -
+    \usepackage{graphicx} % 插入图片
+    \usepackage{subfigure} % 插入并列图
+    \usepackage{pdfpages} % 插入pdf支持
+    \usepackage{caption} % 去掉表/图的标号需要
+        \captionsetup[table]{labelsep=quad} % 去掉 表几 后面的冒号
+        \captionsetup[figure]{labelsep=quad} % 去掉 图几 后面的冒号
+        \DeclareCaptionFormat{captionformat}{\wuhao#1#2#3} % 改图表标签字号
+        \captionsetup{format = captionformat}
+    \usepackage{wrapfig} % 字体环绕图片支持
+    \usepackage{float} % 插入图片可使用 'H' 取消浮动体机制
+    \usepackage{xcolor} % 颜色支持 用于代码高亮 和 tikz绘图
+    \renewcommand\figurename{图} % 改图的标号
+    \usepackage{epstopdf} % 提供eps图片插入支持    matlab2tikz 的实现并不完美 还是插入eps比较好用
+
+    %- Code -
+    \usepackage{listings} % 代码环境
+        \lstset{
+            showstringspaces=false,
+            columns=fixed,
+            numbers=left,
+            frame=none,
+            backgroundcolor=\color[RGB]{245,245,220},
+            keywordstyle=\color[RGB]{0,0,205},
+            %numberstyle=\footnotesize\color{darkgray},
+            commentstyle=\it\color[RGB]{0,96,96},
+            stringstyle=\rmfamily\slshape\monaco\color[RGB]{47,79,79},
+            numberstyle=\tiny\monaco,
+            basicstyle=\tiny\monaco,
+            escapeinside=``,
+            language=c++,
+        }
+    
+    
+    %- Bibliography -
+    % 参考文献角标设定
+    % 角标设定为: 数字编号、排序且压缩、上标、外侧方括    压缩是说当引用多与三个时使用 '-' 连接
+    \usepackage[numbers, sort&compress, super, square]{natbib} 
+    \renewcommand{\refname}{\bfseries\sanhao{参考文献}} % article使用这个
+    %\renewcommand{\bibname}{参考文献} % book使用这个
+    \renewcommand{\bibfont}{\wuhao} % 参考文献项的字体
+    % \renewcommand{\bibnumfmt}[1]{\YouYuan{[#1]}} % 修改文献编号样式
+        \setlength{\bibsep}{0.25ex} % 文献条目之间的距离    单位 倍行距
+        % \bibliographystyle{unsrt} % 设置参考文献排序的类型 按引用顺序 用gbt7714就不需要这个了
+    \usepackage{gbt7714} % 国标文献格式支持
+
+    % 附录
+    \usepackage{appendix}
+
+    % 引用
+    % \usepackage{showkeys} % 写的时候开启 提示引用label 方便差错
+
+    %- Link - 放最后hyperref易与其他宏包冲突
+    \usepackage[hidelinks]{hyperref} % 超链接 与 书签 支持    提供\phantomsection
+
+    %- 默认封面信息 -
+    \title{高斯过程回归方法及其应用}
+    \author{作者: XX}
+    \date{2018.11.1}% 默认使用今天的日期  怎么写怎么打印
+
+% #endregion 
+%- 导言区结束 -
+
+\begin{document}
+    %- 封面与目录 -
+    % #region
+    
+    \maketitle % 打印封面信息
+    % 封面 没有页码部分
+    \thispagestyle{empty} % 这里是封面部分 不用页码
+
+    %- 前置 -
+    % \includepdf[pages=1-7]{./前置与后置/前置与后置.pdf} % pdf格式的封面 可以用pages指定页数
+
+    \pagenumbering{Roman} % 在此命令之后的页码为罗马数字  目录用罗马数字页码
+    % \setcounter{page}{1}
+
+    %- Contents - 目录
+    \newpage
+    \setcounter{secnumdepth}{4} % 目录编号的深度   4 表示到 paragraph 一级  默认为 2 即到subsection
+    \setcounter{tocdepth}{4} % 目录中显示分级的深度
+    \renewcommand{\contentsname}{\hspace*{\fill}\sanhao 目\quad 录\hspace*{\fill}} % 设置'目录'名字
+    \thispagestyle{plain} % 去掉目录的页眉 但保留页码
+    \tableofcontents % 生成目录
+    \thispagestyle{plain} % 去掉目录的页眉 由于目录有两页所以需要写两遍
+    \newpage
+    
+    \pagenumbering{arabic} % 目录结束 此命令之后的页码为阿拉伯数字
+    % #endregion
+
+    %- 正文开始 - -------------------------------------------------------
+
+    %- Abstract -
+    \input{./摘要/摘要.tex}
+
+    % %- 章节 -
+    % \input{./前言/前言.tex}
+
+    \input{./高斯过程回归理论/高斯过程回归理论.tex}
+
+    % \input{./XXX/XXX.tex}
+
+    % \input{./XXX/XXX.tex}
+
+    % \input{./结论/结论.tex}
+
+
+    %- 正文结束 - -------------------------------------------------------
+
+
+    %- 参考文献 - 
+    % 加参考文献有两种方式 
+    % 1.手动实现
+    % 2.bibtex 这里默认使用bibtex 此时需要编译四次  xelatex->bibtex->xelatex*2
+    % 如果没有使用bibtex 引用文献, 而后面用bibtex编译会报错
+    % #region
+    \newpage % 参考文献另起一页
+    \phantomsection\addcontentsline{toc}{section}{参考文献} % 把参考文献 以section级 加到目录
+    \titleformat{\section}{\centering}{\thesection}{1em}{} % 让 参考文献 几个字居中 好像没有更好的实现方法了
+
+    \nocite{Durrande2017} % 如果没有引用的文献也想显示在参考文献中
+
+    \bibliography{bibcite} % 生成参考文献列表
+
+
+    % 附录  
+    \newpage
+    \input{./附录/附录.tex}
+
+    
+    % %- 参考文献 - 不使用bibtex的方式  手动实现
+    % \phantomsection\addcontentsline{toc}{part}{参考文献} % 把参考文献 以part级 加到目录 如果使用bibtex来处理文献不用这个
+    % %\titleformat{\section}{\centering}{\thesection}{1em}{}%让 参考文献 几个字居中 好像没有更好的实现方法了
+    % \begin{thebibliography}{99}% “99” 表示以最多两位数来编号参考文献，用于对齐
+    %     \addtolength{\itemsep}{-2ex} % 用于更改文献行距
+    %     % 文献列表
+    %     \bibitem{1}DevBean.Qt 学习之路 2[EB/OL].https://www.devbean.net/2012/08/qt-study-road-2-catelog/.
+
+    % \end{thebibliography}
+
+    % #endregion
+    
+
+\end{document}
+% end  文档完成  *^_^*
