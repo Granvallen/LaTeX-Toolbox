@@ -1,10 +1,18 @@
 \documentclass[10pt,mathserif]{beamer}
 %- 导言区开始 - 
     \setbeamertemplate{theorems}[numbered] % 增加定理编号
-    \usetheme{metropolis} % 主题设定
+    \usetheme[progressbar=frametitle]{metropolis} % 主题设定
+    % 颜色主题
+    % \usecolortheme{seahorse}
+    % \usecolortheme{beaver}
+    % \usecolortheme{orchid}
+    % \usecolortheme{seagull}
+    % 修改ppt背景色
+    \setbeamercolor{background canvas}{bg=background}
+    
     \usepackage{appendixnumberbeamer}
     
-    \usepackage{booktabs}
+    \usepackage{booktabs} % 优化表格
     \usepackage[scale=2]{ccicons}
     
     \usepackage{xspace}
@@ -122,13 +130,14 @@
     \usepackage{caption} % 去掉表/图的标号需要
         \captionsetup[table]{labelsep=quad} % 去掉 表几 后面的冒号
         \captionsetup[figure]{labelsep=quad} % 去掉 图几 后面的冒号
-        \setlength{\abovecaptionskip}{-10pt} % 设定图与caption距离
+        \setlength{\abovecaptionskip}{10pt} % 设定图与caption距离
         \setlength{\belowcaptionskip}{-10pt}
         \DeclareCaptionFormat{captionformat}{\wuhao #1#2#3} % 改图表标签字号
         \captionsetup{format = captionformat}
     \usepackage{wrapfig} % 字体环绕图片支持
     \usepackage{float} % 插入图片可使用 'H' 取消浮动体机制
     \usepackage{xcolor} % 颜色支持 用于代码高亮 和 tikz绘图
+        \definecolor{background}{RGB}{254, 248, 230} 
     \renewcommand\figurename{图} % 改图的标号
     \usepackage{epstopdf} % 提供eps图片插入支持    matlab2tikz 的实现并不完美 还是插入eps比较好用
     %% ppt插入eps格式图片注意不能是这一页ppt的第一个元素, 否则图片坐标轴会糊, 不知到为什么
@@ -167,7 +176,7 @@
 %- 导言区结束 -
 
 \begin{document}
-    
+
     \maketitle % 显示封面
 
     % 目录页
