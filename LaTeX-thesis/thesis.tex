@@ -155,6 +155,8 @@
     \usepackage{caption} % 去掉表/图的标号需要
         \captionsetup[table]{labelsep=quad} % 去掉 表几 后面的冒号
         \captionsetup[figure]{labelsep=quad} % 去掉 图几 后面的冒号
+        \setlength{\abovecaptionskip}{-10pt} % 设定图与caption距离
+        \setlength{\belowcaptionskip}{-10pt}
         \DeclareCaptionFormat{captionformat}{\wuhao#1#2#3} % 改图表标签字号
         \captionsetup{format = captionformat}
     \usepackage{wrapfig} % 字体环绕图片支持
