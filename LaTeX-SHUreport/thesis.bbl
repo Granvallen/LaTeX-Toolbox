@@ -1,0 +1,35 @@
+\begin{thebibliography}{4}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{#1}
+\expandafter\ifx\csname urlstyle\endcsname\relax\relax\else
+  \urlstyle{same}\fi
+\providecommand{\href}[2]{\url{#2}}
+\providecommand{\doi}[1]{\href{https://doi.org/#1}{#1}}
+
+\bibitem[Herrmann\ et~al.(2018{\natexlab{a}})Herrmann, Wang, Strong~Bowen,
+  Keyder, and Zabih]{herrmann2018object}
+HERRMANN~C, WANG~C, STRONG~BOWEN~R, et~al.
+\newblock Object-centered image
+  stitching\allowbreak[C]//\allowbreak{}Proceedings of the European Conference
+  on Computer Vision (ECCV).
+\newblock [S.l.: s.n.], 2018{\natexlab{a}}: 821-835.
+
+\bibitem[Herrmann\ et~al.(2018{\natexlab{b}})Herrmann, Wang, Bowen, Keyder,
+  Krainin, Liu, and Zabih]{herrmann2018robust}
+HERRMANN~C, WANG~C, BOWEN~R~S, et~al.
+\newblock Robust image stitching using multiple registrations\allowbreak[J].
+\newblock 2018.
+
+\bibitem[Li\ et~al.(2018)Li, Fan, Sun, Wang, and Sun]{li_bundle_2018}
+LI~Y, FAN~S, SUN~Y, et~al.
+\newblock Bundle adjustment method using sparse {BFGS} solution\allowbreak[J].
+\newblock Remote Sensing Letters, 2018, 9\penalty0 (8):\penalty0 789-798.
+
+\bibitem[Zhang\ et~al.(2014)Zhang and Liu]{zhang_parallax-tolerant_2014}
+ZHANG~F, LIU~F.
+\newblock Parallax-{Tolerant} {Image}
+  {Stitching}\allowbreak[C]//\allowbreak{}2014 {IEEE} {Conference} on
+  {Computer} {Vision} and {Pattern} {Recognition}.
+\newblock Columbus, OH, USA: IEEE, 2014: 3262-3269.
+
+\end{thebibliography}
