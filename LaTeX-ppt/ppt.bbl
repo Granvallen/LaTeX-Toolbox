@@ -1,22 +1,31 @@
-\begin{thebibliography}{1}
+\begin{thebibliography}{4}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{#1}
+\expandafter\ifx\csname urlstyle\endcsname\relax\relax\else
+  \urlstyle{same}\fi
+\providecommand{\href}[2]{\url{#2}}
+\providecommand{\doi}[1]{\href{https://doi.org/#1}{#1}}
 
-\bibitem{zhangjiangfan2017}
-张江帆.
-\newblock 基于高斯过程回归的锂电池数据处理.
-\newblock {\em 北京交通大学}, 2017.
-
-\bibitem{rasmussen2006gaussian}
+\bibitem[{C. E. Rasmussen, C. K. I. Williams}(2006)]{rasmussen2006gaussian}
 {C. E. Rasmussen, C. K. I. Williams}.
-\newblock {\em Gaussian processes in machine learning}.
-\newblock the MIT Press, Cambridge, 2006.
+\newblock Gaussian processes in machine learning\allowbreak[M].
+\newblock Cambridge: the MIT Press, 2006.
 
-\bibitem{Rasmussen2017}
+\bibitem[{Carl Edward Rasmussen, Hannes Nickisch}(2017)]{Rasmussen2017}
 {Carl Edward Rasmussen, Hannes Nickisch}.
-\newblock The gpml toolbox version 4.1.
+\newblock The gpml toolbox version 4.1\allowbreak[EB/OL].
 \newblock 2017.
 
-\bibitem{Durrande2017}
+\bibitem[张江帆(2017)]{zhangjiangfan2017}
+张江帆.
+\newblock 基于高斯过程回归的锂电池数据处理\allowbreak[D].
+\newblock 北京交通大学, 2017.
+
+\bibitem[{N. Durrande}(2017)]{Durrande2017}
 {N. Durrande}.
-\newblock Lecture notes on gaussian process regression, 2017.
+\newblock Lecture notes on gaussian process regression\allowbreak[EB/OL].
+\newblock 2017.
+\newblock
+  \url{https://github.com/NicolasDurrande/Gaussian-Process-Regression-handout}.
 
 \end{thebibliography}

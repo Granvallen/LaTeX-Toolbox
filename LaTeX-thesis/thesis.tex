@@ -58,6 +58,14 @@
     % 算法伪代码格式支持
     \usepackage{algorithm}
     \usepackage{algorithmic}
+    % 矩阵格式调整
+    \makeatletter
+    \def\env@matrix{\hskip -\arraycolsep
+    \let\@ifnextchar\new@ifnextchar
+    \linespread{1}\selectfont
+    \renewcommand{\arraystretch}{1.2}%
+    \array{*\c@MaxMatrixCols c}}
+    \makeatother
 
     %- Page -
     \usepackage{geometry}
@@ -99,7 +107,7 @@
         %     {\titlerule*{$\cdots$}\contentspage\hspace*{1em}} % 指引线与页码
     \usepackage{fancyhdr} % 页眉页脚设定
         \pagestyle{fancy}
-        \fancyhf{} 
+        \fancyhf{}
         % 页眉页脚分割线 
         \renewcommand{\headrulewidth}{0.4pt}
         % \renewcommand{\footrulewidth}{0.4pt}
@@ -122,6 +130,8 @@
     % \setlength{\columnsep}{1em} %列间距  好像不管用
     % \setlength{\topmargin}{10mm} % 页眉到页边的距离
     % \setlength{\parskip}{10pt}  % 设置部分段落间隔
+    \def\changemargin#1#2{\list{}{\rightmargin#2\leftmargin#1}\item[]}
+    \let\endchangemargin=\endlist % 增加可更改段落页边距 
 
     %- TIKZ -
     \usepackage{tikz,pgfplots} % 画图支持    如用 matlab2tikz 的输出需要 pgfplots
@@ -161,7 +171,7 @@
         \setlength{\abovecaptionskip}{10pt} % 设定图与caption距离
         \setlength{\belowcaptionskip}{-10pt}
         \DeclareCaptionFormat{captionformat}{\wuhao#1#2#3} % 改图表标签字号
-        \captionsetup{format = captionformat}
+        \captionsetup{format=captionformat}
     \usepackage{wrapfig} % 字体环绕图片支持
     \usepackage{float} % 插入图片可使用 'H' 取消浮动体机制
     \usepackage{xcolor} % 颜色支持 用于代码高亮 和 tikz绘图
@@ -225,7 +235,7 @@
     \thispagestyle{empty} % 这里是封面部分 不用页码
 
     %- 前置 -
-    % \includepdf[pages=1-7]{./前置与后置/前置与后置.pdf} % pdf格式的封面 可以用pages指定页数
+    % \includepdf[pages=1-7]{./封面与尾页/封面.pdf} % pdf格式的封面 可以用pages指定页数
 
     \pagenumbering{Roman} % 在此命令之后的页码为罗马数字  目录用罗马数字页码
     % \setcounter{page}{1}

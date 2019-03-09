@@ -1,20 +1,20 @@
 \frametitle{高斯过程回归模型 - 模型求解}
 $n$次采样可写出似然函数
 
-        \begin{equation}
-            L(\boldsymbol{Y};\boldsymbol{\theta})=\prod^{n}_{i=1}p(\boldsymbol{y}_{i};\boldsymbol{\theta})= (\frac{1}{\sqrt{(2\pi)^{d}|\Sigma_{yy}|}})^{n}\mathrm{exp}\left(-\frac{1}{2}\sum\limits^{n}_{i=1}\boldsymbol{y}^{T}_{i}\Sigma_{yy}^{-1}\boldsymbol{y}_{i}\right).
-        \end{equation}
+    \begin{equation}
+        L(\boldsymbol{Y};\boldsymbol{\theta})=\prod^{n}_{i=1}p(\boldsymbol{y}_{i};\boldsymbol{\theta})= (\frac{1}{\sqrt{(2\pi)^{d}|\Sigma_{yy}|}})^{n}\mathrm{exp}\left(-\frac{1}{2}\sum\limits^{n}_{i=1}\boldsymbol{y}^{T}_{i}\Sigma_{yy}^{-1}\boldsymbol{y}_{i}\right).
+    \end{equation}
 
-        \begin{equation}
-            \mathrm{log}(L(\boldsymbol{Y};\boldsymbol{\theta})) = -\frac{dn}{2}\mathrm{log}(2\pi) - \frac{n}{2}\mathrm{log}(|\Sigma_{yy}|) - \frac{1}{2}\sum\limits^{n}_{i=1}\boldsymbol{y}^{T}_{i}\Sigma_{yy}^{-1}\boldsymbol{y}_{i}.
-        \end{equation}
+    \begin{equation}
+        \mathrm{log}(L(\boldsymbol{Y};\boldsymbol{\theta})) = -\frac{dn}{2}\mathrm{log}(2\pi) - \frac{n}{2}\mathrm{log}(|\Sigma_{yy}|) - \frac{1}{2}\sum\limits^{n}_{i=1}\boldsymbol{y}^{T}_{i}\Sigma_{yy}^{-1}\boldsymbol{y}_{i}.
+    \end{equation}
 
-        为求解$\max\limits_{\boldsymbol{\theta}} \ L(\boldsymbol{Y};\boldsymbol{\theta}).$
+    为求解$\max\limits_{\boldsymbol{\theta}} \ L(\boldsymbol{Y};\boldsymbol{\theta}).$
 
-        \begin{equation}
-            \min_{\boldsymbol{\theta}} \ -2\mathrm{log}(L(\boldsymbol{Y};\boldsymbol{\theta})) = \min_{\boldsymbol{\theta}} \ dn\mathrm{log}(2\pi)+n\mathrm{log}(|\Sigma_{yy}|)+\sum\limits^{n}_{i=1}(\boldsymbol{y}_{i}^{T}\Sigma_{yy}^{-1}\boldsymbol{y}_{i}). \notag
-        \end{equation}
+    \begin{equation}
+        \min_{\boldsymbol{\theta}} \ -2\mathrm{log}(L(\boldsymbol{Y};\boldsymbol{\theta})) = \min_{\boldsymbol{\theta}} \ dn\mathrm{log}(2\pi)+n\mathrm{log}(|\Sigma_{yy}|)+\sum\limits^{n}_{i=1}(\boldsymbol{y}_{i}^{T}\Sigma_{yy}^{-1}\boldsymbol{y}_{i}). \notag
+    \end{equation}
 
-        \begin{equation}
-            \boldsymbol{\theta}=\mathrm{argmin} \ dn\mathrm{log}(2\pi)+n\mathrm{log}(|\Sigma_{yy}|)+\sum\limits^{n}_{i=1}(\boldsymbol{y}_{i}^{T}\Sigma_{yy}^{-1}\boldsymbol{y}_{i}).
-        \end{equation}
+    \begin{equation}
+        \boldsymbol{\theta}=\mathrm{argmin} \ dn\mathrm{log}(2\pi)+n\mathrm{log}(|\Sigma_{yy}|)+\sum\limits^{n}_{i=1}(\boldsymbol{y}_{i}^{T}\Sigma_{yy}^{-1}\boldsymbol{y}_{i}).
+    \end{equation}
