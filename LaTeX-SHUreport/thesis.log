@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.99999 (MiKTeX 2.9.6630 64-bit) (preloaded format=xelatex 2018.4.2)  9 MAR 2019 17:27
+This is XeTeX, Version 3.14159265-2.6-0.99999 (MiKTeX 2.9.6630 64-bit) (preloaded format=xelatex 2018.4.2)  29 MAY 2019 13:44
 entering extended mode
 **c:/GranvallenData/lab/LaTeX-Toolbox/LaTeX-SHUreport/thesis.tex
 (c:/GranvallenData/lab/LaTeX-Toolbox/LaTeX-SHUreport/thesis.tex
@@ -2201,19 +2201,19 @@ Package caption Warning: Unused \captionsetup[figure] on input line 169.
 See the caption package documentation for explanation.
 
 [3]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 329.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 329.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 332.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 332.
  (thesis.aux)
-Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 329.
-Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 329.
+Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 332.
+Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 332.
  )
 (\end occurred when \ifx on line 161 was incomplete) 
 Here is how much of TeX's memory you used:
- 53279 strings out of 427836
- 1187439 string characters out of 3151346
- 1398853 words of memory out of 3000000
- 56573 multiletter control sequences out of 15000+200000
- 530864 words of font info for 52 fonts, out of 3000000 for 9000
+ 53313 strings out of 427836
+ 1189363 string characters out of 3151346
+ 1398856 words of memory out of 3000000
+ 56606 multiletter control sequences out of 15000+200000
+ 530872 words of font info for 53 fonts, out of 3000000 for 9000
  1328 hyphenation exceptions out of 8191
  73i,18n,127p,10511b,479s stack positions out of 5000i,500n,10000p,200000b,50000s
 

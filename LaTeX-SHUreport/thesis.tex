@@ -224,11 +224,11 @@
 
     % 自定义命令
     \newcommand{\Title}[1]{\vspace{1ex} {\sanhao \bfseries #1}}
-    \newcommand{\AuthorID}[2]{\vspace{3ex} {\xiaosihao \bfseries #2, #1}}
-    \newcommand{\Date}[1]{\vspace{2ex} {\wuhao \bfseries #1} \vspace{2ex}}
+    \newcommand{\AuthorID}[2]{\vspace{3.5ex} {\xiaosihao \bfseries #2,\: #1}}
+    \newcommand{\Date}[1]{\vspace{2ex} {\wuhao #1} \vspace{2ex}}
     \newcommand{\Abstractcn}[2]{
         \begin{changemargin}{1cm}{1cm}
-            {\xiaowuhao{\bfseries{摘\quad 要:}} #1 } \\ \vspace{1ex}
+            {\xiaowuhao{\bfseries{摘\quad 要:\ }} #1 } \\ \vspace{1ex}
             {\xiaowuhao {\bfseries 关键词:} #2 }
         \end{changemargin}}
     \newcommand{\Abstracten}[2]{
@@ -252,22 +252,25 @@
     %- 正文开始 - -------------------------------------------------------
 
     %- 题头信息 -
+    \leavevmode % 使第一行的\vspace生效
     \begin{center}
+        \vspace{1ex}
+
         \Title{题目三号粗体居中，段前空1行，段后空0.5行}
 
-        \AuthorID{姓名}{学号}
+        \AuthorID{姓名（小四粗体居中，段前后各0.5行）}{学号}
 
         \Date{日期（五号居中，段前0.5行，段后1行） }
 
         % 中文摘要
-        \Abstractcn{这是文献报告写作要求。排版格式要求包括用纸，页面设置、字体、行距等。基本要求中强调独立撰写，不可简单剪贴现成资料。对文献的数量和质量作出规定，提供文献清单实例，指出一些通病，并给出评分依据。注意中英文摘要一致。}{}
+        \Abstractcn{这是文献报告写作要求。排版格式要求包括用纸，页面设置、字体、行距等。基本要求中强调独立撰写，不可简单剪贴现成资料。对文献的数量和质量作出规定，提供文献清单实例，指出一些通病，并给出评分依据。\textcolor{red}{注意中英文摘要一致。}}{}
 
         \vspace{3ex}
 
         \Title{English Title Uses the Same Format as the Chinese Title}
 
         % 英文摘要
-        \Abstracten{Abstract: An English abstract must be included, which should be 400~500 words in length. This will be a part of the basis for the assessment of your technical English proficiency. You must write it in your own words, rather than just copy from a reference. Mind you that anyone who simply copies from materials written by others will not pass the examination. （200 字左右，与以上中文摘要一致）}{}
+        \Abstracten{Abstract: An English abstract must be included, which should be 400~500 words in length. This will be a part of the basis for the assessment of your technical English proficiency. You must write it in your own words, rather than just copy from a reference. Mind you that anyone who simply copies from materials written by others will not pass the examination. \textcolor{red}{（200 字左右，与以上中文摘要一致）}}{}
 
     \end{center}
     \vspace{2ex}
