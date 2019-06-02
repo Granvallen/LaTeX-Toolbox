@@ -1,5 +1,5 @@
 # LaTeX-Toolbox
-自用latex模板及一些辅助工
+自用latex模板及一些辅助脚本
 
 - LaTeX-thesis 普通论文模板
 - LaTeX-ppt PPT模板

@@ -155,6 +155,7 @@
     
     %- Table -
     \usepackage{multirow}
+    \usepackage{booktabs} % 三线表支持
     \usepackage{longtable} % 跨页表格支持 
     \renewcommand\arraystretch{1.5} % 表格行距
     \renewcommand\tabcolsep{3mm} % 表格列距
@@ -243,14 +244,13 @@
 
 \begin{document}
     %- 封面与目录 -
-    \thispagestyle{empty} % 这里是封面部分 不用页码
 
     % - 前置 -
     \includepdf[pages=1]{./封面与尾页/封面.pdf} % pdf格式的封面 可以用pages指定页数
 
 
     %- 正文开始 - -------------------------------------------------------
-
+    \setcounter{page}{1}
     %- 题头信息 -
     \leavevmode % 使第一行的\vspace生效
     \begin{center}
@@ -270,7 +270,7 @@
         \Title{English Title Uses the Same Format as the Chinese Title}
 
         % 英文摘要
-        \Abstracten{Abstract: An English abstract must be included, which should be 400~500 words in length. This will be a part of the basis for the assessment of your technical English proficiency. You must write it in your own words, rather than just copy from a reference. Mind you that anyone who simply copies from materials written by others will not pass the examination. \textcolor{red}{（200 字左右，与以上中文摘要一致）}}{}
+        \Abstracten{An English abstract must be included, which should be 400~500 words in length. This will be a part of the basis for the assessment of your technical English proficiency. You must write it in your own words, rather than just copy from a reference. Mind you that anyone who simply copies from materials written by others will not pass the examination. \textcolor{red}{（200 字左右，与以上中文摘要一致）}}{}
 
     \end{center}
     \vspace{2ex}
