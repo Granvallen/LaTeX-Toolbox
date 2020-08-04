@@ -1,0 +1,166 @@
+%% start of file `template-zh.tex'.
+%% Copyright 2006-2013 Xavier Danaux (xdanaux@gmail.com).
+%
+% This work may be distributed and/or modified under the
+% conditions of the LaTeX Project Public License version 1.3c,
+% available at http://www.latex-project.org/lppl/.
+
+\documentclass[10pt,a4paper,roman]{moderncv}
+% possible options include font size ('10pt', '11pt' and '12pt'), paper size ('a4paper', 'letterpaper', 'a5paper', 'legalpaper', 'executivepaper' and 'landscape') and font family ('sans' and 'roman')
+
+% moderncv themes
+\moderncvstyle{classic}
+% style options are 'casual' (default), 'classic', 'oldstyle' and 'banking'
+\moderncvcolor{blue}
+% color options 'blue' (default), 'orange', 'green', 'red', 'purple', 'grey' and 'black'
+%\renewcommand{\familydefault}{\sfdefault}
+% to set the default font; use '\sfdefault' for the default sans serif font, '\rmdefault' for the default roman one, or any tex font name
+%\nopagenumbers{}
+% uncomment to suppress automatic page numbering for CVs longer than one page
+
+% character encoding
+\usepackage[utf8]{inputenc}
+% if you are not using xelatex ou lualatex, replace by the encoding you are using
+% \usepackage{CJKutf8}
+% if you need to use CJK to typeset your resume in Chinese, Japanese or Korean
+
+\usepackage[slantfont,boldfont,AutoFakeBold=true]{xeCJK} % 中文支持 
+
+% \setCJKmainfont{Microsoft YaHei}
+\setCJKmainfont{思源黑体}
+\setmainfont{Calibri}
+
+
+
+
+
+% adjust the page margins
+% \usepackage[scale=0.8]{geometry}
+% \setlength{\hintscolumnwidth}{1cm}
+% if you want to change the width of the column with the dates
+% \setlength{\makecvtitlenamewidth}{1cm}
+% for the 'classic' style, if you want to force the width allocated to your name and avoid line breaks. be careful though, the length is normally calculated to avoid any overlap with your personal info; use this at your own typographical risks...
+
+% 页面尺寸
+\usepackage[top=2cm,bottom=1cm,left=2cm,right=2cm]{geometry}
+\setlength{\hintscolumnwidth}{3.2cm}
+
+% 符号支持
+\usepackage{fontawesome}
+    \renewcommand*\githubsocialsymbol{{\faGithub~}}
+    \newcommand\wechatsocialsymbol{{\faWechat~}}
+    \renewcommand*{\emailsymbol}{{\faEnvelope~}}
+    \renewcommand*{\mobilephonesymbol}{{\faPhone~}}
+
+
+% 画图
+\usepackage{tikz}
+\definecolor{frontColor}{rgb}{0.22,0.45,0.70}% light blue
+\definecolor{backColor}{RGB}{200,200,200}% grey
+\newcommand{\grade}[1]{%
+    \begin{tikzpicture}
+    \clip (1em-.4em,-.35em) rectangle (5em +.5em ,1em);
+    \foreach \x in {1,2,3}{
+        \path[{fill=backColor}] (\x em,0) circle (.35em);
+    }
+    \begin{scope}
+    \clip (1em-.4em,-.35em) rectangle (#1em +.5em ,1em);
+    \foreach \x in {1,2,3}{
+        \path[{fill=frontColor}] (\x em,0) circle (.35em);
+    }
+    \end{scope}
+
+    \end{tikzpicture}%
+}
+
+% 其他
+\def\plus{\texttt{+}}
+\def\minus{\texttt{-}}
+
+
+% personal data
+\name{X}{X}
+\title{求职意向: C\texttt{++}开发工程师}
+% optional, remove / comment the line if not wanted
+% \address{Flat 2b, 34 Blessington Street Dublin 7}{D07YF57 Dublin}{Ireland}
+% optional, remove / comment the line if not wanted; the "postcode city" and and "country" arguments can be omitted or provided empty
+\phone[mobile]{(\plus86)~xxx\minus xxxx\minus xxxx}
+\email{xxxxxxxxxx@xxx.com}
+\social[wechat][wx.qq.com/]{xxxx}
+\social[github][github.com/xxxx]{xxxx}
+
+% \extrainfo{\href{https://github.com/}{ name}}
+
+
+\begin{document}
+
+\makecvtitle
+
+\section{教育背景}
+
+\cventry{xxxx.x -- xxxx.x\scriptsize{(预计)}}{硕士}{xxxx}{xxxx}{\textit{信号与信息处理}}{}
+\cventry{xxxx.x -- xxxx.x}{本科}{xxxx}{xxxx}{\textit{电子信息工程}}{}
+
+
+\section{项目经历}
+\cventry{xxxx.x -- xxxx.x}{xxxx系统开发}{独立完成}{}{}{
+    C\texttt{++}, xxx, xxx, xxx
+}
+\cvlistitem{xxxx.}
+\cvlistitem{xxxx.}
+\cvlistitem{xxxx.}
+
+
+
+\cventry{xxxx.x -- xxxx.x}{xxxx开发}{合作项目}{}{}{
+    Python, xxxx, xxxx, xxxx, xxxx
+}
+\cvlistitem{xxxx.}
+\cvlistitem{xxxx.}
+\cvlistitem{xxxx.}
+\cvlistitem{xxxx.}
+\cvlistitem{xxxx.}
+
+
+\section{工程技能}
+\cvitem{编程语言}{
+    \begin{tabular}{llll}
+        C\texttt{++}~\grade{2} & Python~\grade{2} & SQL~\grade{2} & JavaScript~\grade{1} \\
+        C\texttt{\#}~\grade{1} & Lua~\grade{1} & Mathematica~\grade{2} & Matlab~\grade{2}
+    \end{tabular}
+}
+
+\cvitem{库与框架}{
+    \begin{tabular}{llll}
+        Qt~\grade{2} & OpenCV~\grade{2} & Flask~\grade{2} & PyTorch~\grade{2}
+    \end{tabular}
+}
+
+\cvitem{开发工具}{
+    \begin{tabular}{llll}
+        Visual Studio~\grade{2} & Git~\grade{2} & Docker~\grade{1} & 
+    \end{tabular}
+}
+
+\cvitem{文档}{
+    \begin{tabular}{llll}
+        \LaTeX~\grade{2} & Markdown~\grade{2} & &
+    \end{tabular}
+}
+
+
+\section{语言技能}
+\cvitemwithcomment{汉语}{母语.}{}
+\cvitemwithcomment{英语}{熟练, 擅长阅读, CET\texttt{-}6: xxx.}{}
+
+\section{其他荣誉}
+\cvlistitem{xxxx, xxxx.}
+
+% \section{About me}
+% \cvitem{}{I have a lot of determination in my goals and among them are acquiring greater professional knowledge, learning from a team of professionals and being able to pass on that knowledge acquired further when necessary.
+% I would like to work in the software development industry, despite the short period of experience in the development sector, I have a lot of interest in this area and a lot of willingness to learn new things.}
+
+
+
+% \clearpage
+\end{document}

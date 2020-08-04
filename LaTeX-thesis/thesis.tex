@@ -238,19 +238,20 @@
     %- 前置 -
     % \includepdf[pages=1-7]{./封面与尾页/封面.pdf} % pdf格式的封面 可以用pages指定页数
 
-    \pagenumbering{Roman} % 在此命令之后的页码为罗马数字  目录用罗马数字页码
-    % \setcounter{page}{1}
 
     %- Contents - 目录
     \newpage
+    \pagenumbering{Roman} % 在此命令之后的页码为罗马数字  目录用罗马数字页码
+    \setcounter{page}{1}
+
     \setcounter{secnumdepth}{4} % 目录编号的深度   4 表示到 paragraph 一级  默认为 2 即到subsection
     \setcounter{tocdepth}{4} % 目录中显示分级的深度
     \renewcommand{\contentsname}{\hspace*{\fill}\sanhao 目\quad 录\hspace*{\fill}} % 设置'目录'名字
     \thispagestyle{plain} % 去掉目录的页眉 但保留页码
     \tableofcontents % 生成目录
     \thispagestyle{plain} % 去掉目录的页眉 由于目录有两页所以需要写两遍
-    \newpage
     
+    \newpage
     \pagenumbering{arabic} % 目录结束 此命令之后的页码为阿拉伯数字
     % #endregion
 

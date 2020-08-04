@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.99999 (MiKTeX 2.9.6630 64-bit) (preloaded format=xelatex 2018.4.2)  9 MAR 2019 15:56
+This is XeTeX, Version 3.14159265-2.6-0.99999 (MiKTeX 2.9.6630 64-bit) (preloaded format=xelatex 2018.4.2)  5 JUN 2019 16:42
 entering extended mode
 **c:/GranvallenData/lab/LaTeX-Toolbox/LaTeX-thesis/thesis.tex
 (c:/GranvallenData/lab/LaTeX-Toolbox/LaTeX-thesis/thesis.tex
@@ -1682,36 +1682,56 @@ Package: multirow 2016/11/25 v2.2 Span multiple rows of a table
 \multirow@dima=\skip76
 \bigstrutjot=\dimen308
 )
+("C:\GranvallenData\soft\MiKTeX 2.9\tex\latex\booktabs\booktabs.sty"
+Package: booktabs 2005/04/14 v1.61803 publication quality tables
+\heavyrulewidth=\dimen309
+\lightrulewidth=\dimen310
+\cmidrulewidth=\dimen311
+\belowrulesep=\dimen312
+\belowbottomsep=\dimen313
+\aboverulesep=\dimen314
+\abovetopsep=\dimen315
+\cmidrulesep=\dimen316
+\cmidrulekern=\dimen317
+\defaultaddspace=\dimen318
+\@cmidla=\count317
+\@cmidlb=\count318
+\@aboverulesep=\dimen319
+\@belowrulesep=\dimen320
+\@thisruleclass=\count319
+\@lastruleclass=\count320
+\@thisrulewidth=\dimen321
+)
 ("C:\GranvallenData\soft\MiKTeX 2.9\tex\latex\tools\longtable.sty"
 Package: longtable 2014/10/28 v4.11 Multi-page Table package (DPC)
 \LTleft=\skip77
 \LTright=\skip78
 \LTpre=\skip79
 \LTpost=\skip80
-\LTchunksize=\count317
-\LTcapwidth=\dimen309
+\LTchunksize=\count321
+\LTcapwidth=\dimen322
 \LT@head=\box81
 \LT@firsthead=\box82
 \LT@foot=\box83
 \LT@lastfoot=\box84
-\LT@cols=\count318
-\LT@rows=\count319
-\c@LT@tables=\count320
-\c@LT@chunks=\count321
+\LT@cols=\count322
+\LT@rows=\count323
+\c@LT@tables=\count324
+\c@LT@chunks=\count325
 \LT@p@ftn=\toks49
 )
 ("C:\GranvallenData\soft\MiKTeX 2.9\tex\latex\subfigure\subfigure.sty"
 Package: subfigure 2002/07/30 v2.1.4 subfigure package
 \subfigtopskip=\skip81
 \subfigcapskip=\skip82
-\subfigcaptopadj=\dimen310
+\subfigcaptopadj=\dimen323
 \subfigbottomskip=\skip83
-\subfigcapmargin=\dimen311
+\subfigcapmargin=\dimen324
 \subfiglabelskip=\skip84
-\c@subfigure=\count322
-\c@lofdepth=\count323
-\c@subtable=\count324
-\c@lotdepth=\count325
+\c@subfigure=\count326
+\c@lofdepth=\count327
+\c@subtable=\count328
+\c@lotdepth=\count329
 
 ****************************************
 * Local config file subfigure.cfg used *
@@ -1725,15 +1745,15 @@ Package: pdfpages 2017/10/31 v0.5l Insert pages of external PDF documents (AM)
 
 ("C:\GranvallenData\soft\MiKTeX 2.9\tex\latex\tools\calc.sty"
 Package: calc 2014/10/28 v4.3 Infix arithmetic (KKT,FJ)
-\calc@Acount=\count326
-\calc@Bcount=\count327
-\calc@Adimen=\dimen312
-\calc@Bdimen=\dimen313
+\calc@Acount=\count330
+\calc@Bcount=\count331
+\calc@Adimen=\dimen325
+\calc@Bdimen=\dimen326
 \calc@Askip=\skip87
 \calc@Bskip=\skip88
 LaTeX Info: Redefining \setlength on input line 80.
 LaTeX Info: Redefining \addtolength on input line 81.
-\calc@Ccount=\count328
+\calc@Ccount=\count332
 \calc@Cskip=\skip89
 )
 ("C:\GranvallenData\soft\MiKTeX 2.9\tex\latex\eso-pic\eso-pic.sty"
@@ -1748,8 +1768,8 @@ Package: infwarerr 2016/05/16 v1.4 Providing info/warning/error messages (HO)
 ("C:\GranvallenData\soft\MiKTeX 2.9\tex\generic\oberdiek\ltxcmds.sty"
 Package: ltxcmds 2016/05/16 v1.23 LaTeX kernel commands for general use (HO)
 )))
-\AM@pagewidth=\dimen314
-\AM@pageheight=\dimen315
+\AM@pagewidth=\dimen327
+\AM@pageheight=\dimen328
 
 ("C:\GranvallenData\soft\MiKTeX 2.9\tex\latex\pdfpages\ppxetex.def"
 File: ppxetex.def 2017/10/31 v0.5l Pdfpages driver for XeTeX (AM)
@@ -1757,7 +1777,7 @@ File: ppxetex.def 2017/10/31 v0.5l Pdfpages driver for XeTeX (AM)
 \AM@pagebox=\box85
 \AM@global@opts=\toks50
 \AM@toc@title=\toks51
-\c@AM@survey=\count329
+\c@AM@survey=\count333
 \AM@templatesizebox=\box86
 )
 ("C:\GranvallenData\soft\MiKTeX 2.9\tex\latex\caption\caption.sty"
@@ -1766,15 +1786,15 @@ Package: caption 2016/02/21 v3.3-144 Customizing captions (AR)
 ("C:\GranvallenData\soft\MiKTeX 2.9\tex\latex\caption\caption3.sty"
 Package: caption3 2016/05/22 v1.7-166 caption3 kernel (AR)
 Package caption3 Info: TeX engine: e-TeX on input line 67.
-\captionmargin=\dimen316
-\captionmargin@=\dimen317
-\captionwidth=\dimen318
-\caption@tempdima=\dimen319
-\caption@indent=\dimen320
-\caption@parindent=\dimen321
-\caption@hangindent=\dimen322
+\captionmargin=\dimen329
+\captionmargin@=\dimen330
+\captionwidth=\dimen331
+\caption@tempdima=\dimen332
+\caption@indent=\dimen333
+\caption@parindent=\dimen334
+\caption@hangindent=\dimen335
 )
-\c@ContinuedFloat=\count330
+\c@ContinuedFloat=\count334
 Package caption Info: float package is loaded.
 Package caption Info: longtable package is loaded.
 
@@ -1784,9 +1804,9 @@ Package: ltcaption 2013/06/09 v1.4-94 longtable captions (AR)
 Package caption Info: subfigure package is loaded.
 )
 ("C:\GranvallenData\soft\MiKTeX 2.9\tex\latex\wrapfig\wrapfig.sty"
-\wrapoverhang=\dimen323
-\WF@size=\dimen324
-\c@WF@wrappedlines=\count331
+\wrapoverhang=\dimen336
+\WF@size=\dimen337
+\c@WF@wrappedlines=\count335
 \WF@box=\box87
 \WF@everypar=\toks52
 Package: wrapfig 2003/01/31  v 3.6
@@ -1835,23 +1855,23 @@ Package epstopdf Warning: Drivers other than `pdftex' and `luatex' are not supp
 orted.
 
 )) ("C:\GranvallenData\soft\MiKTeX 2.9\tex\latex\listings\listings.sty"
-\lst@mode=\count332
+\lst@mode=\count336
 \lst@gtempboxa=\box88
 \lst@token=\toks53
-\lst@length=\count333
-\lst@currlwidth=\dimen325
-\lst@column=\count334
-\lst@pos=\count335
-\lst@lostspace=\dimen326
-\lst@width=\dimen327
-\lst@newlines=\count336
-\lst@lineno=\count337
-\lst@maxwidth=\dimen328
+\lst@length=\count337
+\lst@currlwidth=\dimen338
+\lst@column=\count338
+\lst@pos=\count339
+\lst@lostspace=\dimen339
+\lst@width=\dimen340
+\lst@newlines=\count340
+\lst@lineno=\count341
+\lst@maxwidth=\dimen341
 
 ("C:\GranvallenData\soft\MiKTeX 2.9\tex\latex\listings\lstmisc.sty"
 File: lstmisc.sty 2015/06/04 1.6 (Carsten Heinz)
-\c@lstnumber=\count338
-\lst@skipnumbers=\count339
+\c@lstnumber=\count342
+\lst@skipnumbers=\count343
 \lst@framebox=\box89
 )
 ("C:\GranvallenData\soft\MiKTeX 2.9\tex\latex\listings\listings.cfg"
@@ -1873,14 +1893,14 @@ Package: natbib 2010/09/13 8.31b (PWD, AO)
 \bibhang=\skip90
 \bibsep=\skip91
 LaTeX Info: Redefining \cite on input line 694.
-\c@NAT@ctr=\count340
+\c@NAT@ctr=\count344
 )
 ("C:\GranvallenData\soft\MiKTeX 2.9\tex\latex\gbt7714\gbt7714.sty"
 Package: gbt7714 2018/05/12 v1.0.7 GB/T 7714-2015 BibTeX Style
 
 ("C:\GranvallenData\soft\MiKTeX 2.9\tex\latex\etoolbox\etoolbox.sty"
 Package: etoolbox 2018/02/11 v2.5e e-TeX tools for LaTeX (JAW)
-\etb@tempcnta=\count341
+\etb@tempcnta=\count345
 )
 ("C:\GranvallenData\soft\MiKTeX 2.9\tex\latex\url\url.sty"
 \Urlmuskip=\muskip18
@@ -1888,9 +1908,9 @@ Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
 ))
 ("C:\GranvallenData\soft\MiKTeX 2.9\tex\latex\appendix\appendix.sty"
 Package: appendix 2009/09/02 v1.2b extra appendix facilities
-\c@@pps=\count342
-\c@@ppsavesec=\count343
-\c@@ppsaveapp=\count344
+\c@@pps=\count346
+\c@@ppsavesec=\count347
+\c@@ppsaveapp=\count348
 )
 ("C:\GranvallenData\soft\MiKTeX 2.9\tex\latex\hyperref\hyperref.sty"
 Package: hyperref 2018/02/06 v6.86b Hypertext links for LaTeX
@@ -1930,14 +1950,14 @@ Package: hycolor 2016/05/16 v1.8 Color options for hyperref/bookmark (HO)
 ("C:\GranvallenData\soft\MiKTeX 2.9\tex\latex\oberdiek\auxhook.sty"
 Package: auxhook 2016/05/16 v1.4 Hooks for auxiliary files (HO)
 )
-\@linkdim=\dimen329
-\Hy@linkcounter=\count345
-\Hy@pagecounter=\count346
+\@linkdim=\dimen342
+\Hy@linkcounter=\count349
+\Hy@pagecounter=\count350
 
 ("C:\GranvallenData\soft\MiKTeX 2.9\tex\latex\hyperref\pd1enc.def"
 File: pd1enc.def 2018/02/06 v6.86b Hyperref: PDFDocEncoding definition (HO)
 )
-\Hy@SavedSpaceFactor=\count347
+\Hy@SavedSpaceFactor=\count351
 
 ("C:\GranvallenData\soft\MiKTeX 2.9\tex\latex\00miktex\hyperref.cfg"
 File: hyperref.cfg 2002/06/06 v1.2 hyperref configuration of TeXLive
@@ -1949,12 +1969,12 @@ Package hyperref Info: Plain pages OFF on input line 4524.
 Package hyperref Info: Backreferencing OFF on input line 4529.
 Package hyperref Info: Implicit mode ON; LaTeX internals redefined.
 Package hyperref Info: Bookmarks ON on input line 4762.
-\c@Hy@tempcnt=\count348
+\c@Hy@tempcnt=\count352
 LaTeX Info: Redefining \url on input line 5115.
-\XeTeXLinkMargin=\dimen330
-\Fld@menulength=\count349
-\Field@Width=\dimen331
-\Fld@charsize=\dimen332
+\XeTeXLinkMargin=\dimen343
+\Fld@menulength=\count353
+\Field@Width=\dimen344
+\Fld@charsize=\dimen345
 Package hyperref Info: Hyper figures OFF on input line 6369.
 Package hyperref Info: Link nesting OFF on input line 6374.
 Package hyperref Info: Hyper index ON on input line 6377.
@@ -1964,9 +1984,9 @@ Package hyperref Info: Link coloring with OCG OFF on input line 6394.
 Package hyperref Info: PDF/A mode OFF on input line 6399.
 LaTeX Info: Redefining \ref on input line 6439.
 LaTeX Info: Redefining \pageref on input line 6443.
-\Hy@abspage=\count350
-\c@Item=\count351
-\c@Hfootnote=\count352
+\Hy@abspage=\count354
+\c@Item=\count355
+\c@Hfootnote=\count356
 )
 Package hyperref Info: Driver (autodetected): hxetex.
 
@@ -1981,10 +2001,10 @@ Package: stringenc 2016/05/16 v1.11 Convert strings between diff. encodings (HO
 )
 )
 \pdfm@box=\box90
-\c@Hy@AnnotLevel=\count353
-\HyField@AnnotCount=\count354
-\Fld@listcount=\count355
-\c@bookmark@seq@number=\count356
+\c@Hy@AnnotLevel=\count357
+\HyField@AnnotCount=\count358
+\Fld@listcount=\count359
+\c@bookmark@seq@number=\count360
 
 ("C:\GranvallenData\soft\MiKTeX 2.9\tex\latex\oberdiek\rerunfilecheck.sty"
 Package: rerunfilecheck 2016/05/16 v1.8 Rerun checks for auxiliary files (HO)
@@ -1999,36 +2019,36 @@ tly
 )
 ("C:\GranvallenData\soft\MiKTeX 2.9\tex\xelatex\xecjk\xeCJK-listings.sty"
 Package: xeCJK-listings 2018/02/27 v3.6.1 xeCJK patch file for listings
-\l__xeCJK_listings_max_char_int=\count357
-\l__xeCJK_listings_flag_int=\count358
+\l__xeCJK_listings_max_char_int=\count361
+\l__xeCJK_listings_flag_int=\count362
 )
 (thesis.aux)
 \openout1 = `thesis.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 229.
-LaTeX Font Info:    ... okay on input line 229.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 229.
-LaTeX Font Info:    ... okay on input line 229.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 229.
-LaTeX Font Info:    ... okay on input line 229.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 229.
-LaTeX Font Info:    ... okay on input line 229.
-LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 229.
-LaTeX Font Info:    ... okay on input line 229.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 229.
-LaTeX Font Info:    ... okay on input line 229.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 229.
-LaTeX Font Info:    ... okay on input line 229.
-LaTeX Font Info:    Checking defaults for T3/cmr/m/n on input line 229.
-LaTeX Font Info:    Try loading font information for T3+cmr on input line 229.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 230.
+LaTeX Font Info:    ... okay on input line 230.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 230.
+LaTeX Font Info:    ... okay on input line 230.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 230.
+LaTeX Font Info:    ... okay on input line 230.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 230.
+LaTeX Font Info:    ... okay on input line 230.
+LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 230.
+LaTeX Font Info:    ... okay on input line 230.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 230.
+LaTeX Font Info:    ... okay on input line 230.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 230.
+LaTeX Font Info:    ... okay on input line 230.
+LaTeX Font Info:    Checking defaults for T3/cmr/m/n on input line 230.
+LaTeX Font Info:    Try loading font information for T3+cmr on input line 230.
  ("C:\GranvallenData\soft\MiKTeX 2.9\tex\latex\tipa\t3cmr.fd"
 File: t3cmr.fd 2001/12/31 TIPA font definitions
 )
-LaTeX Font Info:    ... okay on input line 229.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 229.
-LaTeX Font Info:    ... okay on input line 229.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 229.
-LaTeX Font Info:    ... okay on input line 229.
+LaTeX Font Info:    ... okay on input line 230.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 230.
+LaTeX Font Info:    ... okay on input line 230.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 230.
+LaTeX Font Info:    ... okay on input line 230.
 .................................................
 . fontspec info: "setup-math"
 . 
@@ -2036,64 +2056,64 @@ LaTeX Font Info:    ... okay on input line 229.
 .................................................
 \symlegacymaths=\mathgroup7
 LaTeX Font Info:    Overwriting symbol font `legacymaths' in version `bold'
-(Font)                  OT1/cmr/m/n --> OT1/cmr/bx/n on input line 229.
-LaTeX Font Info:    Redeclaring math accent \acute on input line 229.
-LaTeX Font Info:    Redeclaring math accent \grave on input line 229.
-LaTeX Font Info:    Redeclaring math accent \ddot on input line 229.
-LaTeX Font Info:    Redeclaring math accent \tilde on input line 229.
-LaTeX Font Info:    Redeclaring math accent \bar on input line 229.
-LaTeX Font Info:    Redeclaring math accent \breve on input line 229.
-LaTeX Font Info:    Redeclaring math accent \check on input line 229.
-LaTeX Font Info:    Redeclaring math accent \hat on input line 229.
-LaTeX Font Info:    Redeclaring math accent \dot on input line 229.
-LaTeX Font Info:    Redeclaring math accent \mathring on input line 229.
-LaTeX Font Info:    Redeclaring math symbol \Gamma on input line 229.
-LaTeX Font Info:    Redeclaring math symbol \Delta on input line 229.
-LaTeX Font Info:    Redeclaring math symbol \Theta on input line 229.
-LaTeX Font Info:    Redeclaring math symbol \Lambda on input line 229.
-LaTeX Font Info:    Redeclaring math symbol \Xi on input line 229.
-LaTeX Font Info:    Redeclaring math symbol \Pi on input line 229.
-LaTeX Font Info:    Redeclaring math symbol \Sigma on input line 229.
-LaTeX Font Info:    Redeclaring math symbol \Upsilon on input line 229.
-LaTeX Font Info:    Redeclaring math symbol \Phi on input line 229.
-LaTeX Font Info:    Redeclaring math symbol \Psi on input line 229.
-LaTeX Font Info:    Redeclaring math symbol \Omega on input line 229.
-LaTeX Font Info:    Redeclaring math symbol \mathdollar on input line 229.
-LaTeX Font Info:    Redeclaring symbol font `operators' on input line 229.
+(Font)                  OT1/cmr/m/n --> OT1/cmr/bx/n on input line 230.
+LaTeX Font Info:    Redeclaring math accent \acute on input line 230.
+LaTeX Font Info:    Redeclaring math accent \grave on input line 230.
+LaTeX Font Info:    Redeclaring math accent \ddot on input line 230.
+LaTeX Font Info:    Redeclaring math accent \tilde on input line 230.
+LaTeX Font Info:    Redeclaring math accent \bar on input line 230.
+LaTeX Font Info:    Redeclaring math accent \breve on input line 230.
+LaTeX Font Info:    Redeclaring math accent \check on input line 230.
+LaTeX Font Info:    Redeclaring math accent \hat on input line 230.
+LaTeX Font Info:    Redeclaring math accent \dot on input line 230.
+LaTeX Font Info:    Redeclaring math accent \mathring on input line 230.
+LaTeX Font Info:    Redeclaring math symbol \Gamma on input line 230.
+LaTeX Font Info:    Redeclaring math symbol \Delta on input line 230.
+LaTeX Font Info:    Redeclaring math symbol \Theta on input line 230.
+LaTeX Font Info:    Redeclaring math symbol \Lambda on input line 230.
+LaTeX Font Info:    Redeclaring math symbol \Xi on input line 230.
+LaTeX Font Info:    Redeclaring math symbol \Pi on input line 230.
+LaTeX Font Info:    Redeclaring math symbol \Sigma on input line 230.
+LaTeX Font Info:    Redeclaring math symbol \Upsilon on input line 230.
+LaTeX Font Info:    Redeclaring math symbol \Phi on input line 230.
+LaTeX Font Info:    Redeclaring math symbol \Psi on input line 230.
+LaTeX Font Info:    Redeclaring math symbol \Omega on input line 230.
+LaTeX Font Info:    Redeclaring math symbol \mathdollar on input line 230.
+LaTeX Font Info:    Redeclaring symbol font `operators' on input line 230.
 LaTeX Font Info:    Encoding `OT1' has changed to `TU' for symbol font
-(Font)              `operators' in the math version `normal' on input line 229.
+(Font)              `operators' in the math version `normal' on input line 230.
 
 LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
 (Font)                  OT1/cmr/m/n --> TU/TimesNewRoman(0)/m/n on input line 2
-29.
+30.
 LaTeX Font Info:    Encoding `OT1' has changed to `TU' for symbol font
-(Font)              `operators' in the math version `bold' on input line 229.
+(Font)              `operators' in the math version `bold' on input line 230.
 LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
 (Font)                  OT1/cmr/bx/n --> TU/TimesNewRoman(0)/m/n on input line 
-229.
+230.
 LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
 (Font)                  TU/TimesNewRoman(0)/m/n --> TU/TimesNewRoman(0)/m/n on 
-input line 229.
+input line 230.
 LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `normal'
 (Font)                  OT1/cmr/m/it --> TU/TimesNewRoman(0)/m/it on input line
- 229.
+ 230.
 LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `normal'
 (Font)                  OT1/cmr/bx/n --> TU/TimesNewRoman(0)/bx/n on input line
- 229.
+ 230.
 LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `normal'
-(Font)                  OT1/cmss/m/n --> TU/lmss/m/n on input line 229.
+(Font)                  OT1/cmss/m/n --> TU/lmss/m/n on input line 230.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `normal'
-(Font)                  OT1/cmtt/m/n --> TU/lmtt/m/n on input line 229.
+(Font)                  OT1/cmtt/m/n --> TU/lmtt/m/n on input line 230.
 LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
 (Font)                  TU/TimesNewRoman(0)/m/n --> TU/TimesNewRoman(0)/bx/n on
- input line 229.
+ input line 230.
 LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `bold'
 (Font)                  OT1/cmr/bx/it --> TU/TimesNewRoman(0)/bx/it on input li
-ne 229.
+ne 230.
 LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
-(Font)                  OT1/cmss/bx/n --> TU/lmss/bx/n on input line 229.
+(Font)                  OT1/cmss/bx/n --> TU/lmss/bx/n on input line 230.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
-(Font)                  OT1/cmtt/m/n --> TU/lmtt/bx/n on input line 229.
+(Font)                  OT1/cmtt/m/n --> TU/lmtt/bx/n on input line 230.
 
 *geometry* detected driver: pdftex
 *geometry* verbose mode - [ preamble ] result:
@@ -2147,8 +2167,8 @@ Package caption Info: hyperref package is loaded.
 Package caption Info: listings package is loaded.
 Package caption Info: wrapfig package is loaded.
 Package caption Info: End \AtBeginDocument code.
-\c@lstlisting=\count359
-Package hyperref Info: Link coloring OFF on input line 229.
+\c@lstlisting=\count363
+Package hyperref Info: Link coloring OFF on input line 230.
 
 ("C:\GranvallenData\soft\MiKTeX 2.9\tex\latex\hyperref\nameref.sty"
 Package: nameref 2016/05/21 v2.44 Cross-referencing by name of section
@@ -2156,27 +2176,27 @@ Package: nameref 2016/05/21 v2.44 Cross-referencing by name of section
 ("C:\GranvallenData\soft\MiKTeX 2.9\tex\generic\oberdiek\gettitlestring.sty"
 Package: gettitlestring 2016/05/16 v1.5 Cleanup title references (HO)
 )
-\c@section@level=\count360
+\c@section@level=\count364
 )
-LaTeX Info: Redefining \ref on input line 229.
-LaTeX Info: Redefining \pageref on input line 229.
-LaTeX Info: Redefining \nameref on input line 229.
+LaTeX Info: Redefining \ref on input line 230.
+LaTeX Info: Redefining \pageref on input line 230.
+LaTeX Info: Redefining \nameref on input line 230.
 
 (thesis.out) (thesis.out)
 \@outlinefile=\write4
 \openout4 = `thesis.out'.
 
-LaTeX Font Info:    Try loading font information for U+msa on input line 235.
+LaTeX Font Info:    Try loading font information for U+msa on input line 236.
 
 ("C:\GranvallenData\soft\MiKTeX 2.9\tex\latex\amsfonts\umsa.fd"
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 235.
+LaTeX Font Info:    Try loading font information for U+msb on input line 236.
 
 ("C:\GranvallenData\soft\MiKTeX 2.9\tex\latex\amsfonts\umsb.fd"
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-LaTeX Font Info:    Try loading font information for U+rsfs on input line 235.
+LaTeX Font Info:    Try loading font information for U+rsfs on input line 236.
 
 ("C:\GranvallenData\soft\MiKTeX 2.9\tex\latex\jknappen\ursfs.fd"
 File: ursfs.fd 1998/03/24 rsfs font definition file (jk)
@@ -2191,7 +2211,7 @@ File: se-ascii-print.def 2016/05/16 v1.11 stringenc: Printable ASCII characters
 \tf@toc=\write5
 \openout5 = `thesis.toc'.
 
- [2] (摘要/摘要.tex) (章节/高斯过程回归理论.tex [1]
+ [1] (摘要/摘要.tex) (章节/高斯过程回归理论.tex [1]
 LaTeX Font Info:    Try loading font information for U+dsrom on input line 21.
 
 ("C:\GranvallenData\soft\MiKTeX 2.9\tex\latex\doublestroke\udsrom.fd"
@@ -2430,22 +2450,22 @@ Overfull \hbox (15.36076pt too wide) detected at line 198
 
 [16] [17])
 
-Package caption Warning: Unused \captionsetup[figure] on input line 170.
+Package caption Warning: Unused \captionsetup[figure] on input line 171.
 See the caption package documentation for explanation.
 
 [18]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 309.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 309.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 311.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 311.
  (thesis.aux)
-Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 309.
-Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 309.
+Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 311.
+Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 311.
  )
 (\end occurred when \ifx on line 161 was incomplete) 
 Here is how much of TeX's memory you used:
- 53390 strings out of 427836
- 1183351 string characters out of 3151346
- 1397573 words of memory out of 3000000
- 56620 multiletter control sequences out of 15000+200000
+ 53443 strings out of 427836
+ 1183991 string characters out of 3151346
+ 1398366 words of memory out of 3000000
+ 56671 multiletter control sequences out of 15000+200000
  546572 words of font info for 130 fonts, out of 3000000 for 9000
  1328 hyphenation exceptions out of 8191
  73i,15n,127p,10508b,479s stack positions out of 5000i,500n,10000p,200000b,50000s
