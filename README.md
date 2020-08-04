@@ -3,4 +3,5 @@
 
 - LaTeX-thesis 普通论文模板
 - LaTeX-ppt PPT模板
+- LaTeX-resume 求职简历模板
 - LaTeX-SHUreport 由LaTeX-thesis改的SHU文献课报告模板
